@@ -1,0 +1,16 @@
+schema:
+  - './src/graphql/schemas/*.graphql'
+overwrite: true
+
+config:
+  maybeValue: 'T | null | undefined'
+  contextType: ../context#Context
+
+generates:
+  src/graphql/types/index.ts:
+    config:
+      inputMaybeValue: T | undefined
+      makeResolverTypeCallable: true
+    plugins:
+      - typescript
+      - typescript-resolvers

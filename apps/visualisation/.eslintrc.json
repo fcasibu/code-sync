@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "@code-sync/eslint-config/react.json",
+    "plugin:storybook/recommended"
+  ]
+}

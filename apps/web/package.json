@@ -1,22 +1,37 @@
 {
-  "name": "web",
+  "name": "@code-sync/web",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite --clearScreen false",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint \"src/**/*.ts\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "stylelint": "stylelint --cache --cache-location ./.stylelintcache --cache-strategy content **/*.css",
+    "eslint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
+    "lint": "pnpm stylelint && pnpm eslint",
+    "lint:fix": "pnpm stylelint --fix && pnpm eslint --fix"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*"
+    "@code-sync/logger": "workspace:*",
+    "@code-sync/translations": "workspace:*",
+    "next": "14.1.4",
+    "next-intl": "3.10.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4"
+    "@code-sync/eslint-config": "workspace:*",
+    "@code-sync/stylelint-config": "workspace:*",
+    "@code-sync/typescript-config": "workspace:*",
+    "@next/bundle-analyzer": "14.1.4",
+    "@types/node": "20.11.30",
+    "@types/react": "18.2.73",
+    "@types/react-dom": "18.2.23",
+    "autoprefixer": "10.0.1",
+    "eslint": "8.57.0",
+    "postcss": "8.4.38",
+    "stylelint": "16.3.1",
+    "tailwindcss": "3.4.3",
+    "typescript": "5.3.2"
   }
 }

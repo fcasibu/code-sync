@@ -1,0 +1,9 @@
+{
+  "extends": "@code-sync/typescript-config/node.json",
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`resolver#User > user > should return a user with the correct structure through their ID 1`] = `
+{
+  "user": {
+    "email": "jerry@example.com",
+    "id": "1",
+    "name": "Jerry",
+  },
+}
+`;
+
+exports[`resolver#User > users > should return a list of users with the correct structure 1`] = `
+{
+  "users": [
+    {
+      "email": "jerry@example.com",
+      "id": "1",
+      "name": "Jerry",
+    },
+    {
+      "email": "george@example.com",
+      "id": "2",
+      "name": "George",
+    },
+  ],
+}
+`;

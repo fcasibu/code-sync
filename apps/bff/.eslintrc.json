@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "@code-sync/eslint-config/base.json"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "processor": "@graphql-eslint/graphql"
+    },
+    {
+      "files": [
+        "*.graphql"
+      ],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": [
+        "@graphql-eslint"
+      ],
+      "rules": {
+        "@graphql-eslint/known-type-names": 2
+      },
+      "parserOptions": {
+        "schema": "./src/graphql/schemas/*.graphql"
+      }
+    }
+  ]
+}

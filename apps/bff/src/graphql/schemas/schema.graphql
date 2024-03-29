@@ -1,0 +1,23 @@
+type Query {
+  users: [User]
+  user(input: UserByIDInput!): User
+  test: HelloWorld!
+}
+
+input UserByIDInput {
+  id: String!
+}
+
+type User {
+  id: String!
+  name: String
+  email: String
+}
+
+type HelloWorld {
+  helloWorld: String
+}
+
+schema {
+  query: Query
+}

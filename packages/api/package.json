@@ -1,0 +1,32 @@
+{
+  "name": "@code-sync/api",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "pnpm type-check && tsup",
+    "test": "vitest run",
+    "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@code-sync/eslint-config": "workspace:*",
+    "@code-sync/stylelint-config": "workspace:*",
+    "@code-sync/typescript-config": "workspace:*",
+    "@code-sync/vitest-config": "workspace:*",
+    "@faker-js/faker": "8.4.1",
+    "@types/node": "20.11.30",
+    "@types/pg": "8.11.4",
+    "@vitest/coverage-v8": "1.4.0",
+    "eslint": "8.57.0",
+    "stylelint": "16.3.1",
+    "tsup": "8.0.2",
+    "typescript": "5.3.2",
+    "vitest": "1.4.0"
+  },
+  "dependencies": {
+    "pg": "8.11.3"
+  }
+}

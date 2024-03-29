@@ -1,0 +1,13 @@
+{
+  "name": "@code-sync/stylelint-config",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "stylelint-config-clean-order": "5.4.1",
+    "stylelint-config-css-modules": "4.4.0",
+    "stylelint-config-standard": "36.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

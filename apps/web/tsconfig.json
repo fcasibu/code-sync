@@ -1,4 +1,22 @@
 {
-  "extends": "@repo/typescript-config/vite.json",
-  "include": ["src"]
+  "extends": "@code-sync/typescript-config/next.json",
+  "compilerOptions": {
+    "types": [
+      "@code-sync/translations/global.d.ts"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,0 +1,5 @@
+dist
+
+# cache locations
+.prettiercache
+.eslintcache

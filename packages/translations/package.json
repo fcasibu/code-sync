@@ -1,0 +1,23 @@
+{
+  "name": "@code-sync/translations",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "eslint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
+    "lint": "pnpm type-check && pnpm eslint",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@code-sync/eslint-config": "workspace:*",
+    "@code-sync/typescript-config": "workspace:*",
+    "eslint": "8.57.0",
+    "typescript": "5.3.2"
+  },
+  "dependencies": {
+    "next": "14.1.4",
+    "next-intl": "3.10.0"
+  }
+}

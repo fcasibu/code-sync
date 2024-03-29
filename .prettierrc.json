@@ -1,0 +1,15 @@
+{
+  "importOrder": [
+    "^node(:.*)?$",
+    "^(react$)|^(react/(.*)$)",
+    "<THIRD_PARTY_MODULES>",
+    "^@code-sync/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports"
+  ],
+  "semi": true,
+  "singleQuote": true
+}

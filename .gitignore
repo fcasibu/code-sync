@@ -9,3 +9,10 @@ dist-ssr
 .cache
 server/dist
 public/dist
+
+# cache locations
+.prettiercache
+.eslintcache
+.stylelintcache
+
+*storybook.log

@@ -1,0 +1,16 @@
+{
+  "extends": "@code-sync/typescript-config/base.json",
+  "compilerOptions": {
+    "types": [
+      "./global.d.ts"
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

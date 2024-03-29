@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@code-sync/stylelint-config/base.json"
+  ]
+}
