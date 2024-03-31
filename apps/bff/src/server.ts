@@ -1,13 +1,13 @@
 import type { Server } from 'node:http';
 import { ApolloServer } from '@apollo/server';
-import { makeExecutableSchema } from '@graphql-tools/schema';
+import { addResolversToSchema } from '@graphql-tools/schema';
 import 'dotenv/config';
 import express from 'express';
 import type { PoolClient } from '@code-sync/api';
 import logger from '@code-sync/logger';
 import type { Context } from './graphql';
 import { resolvers } from './graphql';
-import { typeDefs } from './graphql/schemas';
+import { schema } from './graphql/schemas';
 import {
   checkHealthMiddleware,
   corsMiddleware,
@@ -36,7 +36,7 @@ export const startServer = async ({
 }: StartServerProps): Promise<Application> => {
   try {
     const apolloServer = new ApolloServer<Context>({
-      schema: makeExecutableSchema({ typeDefs, resolvers }),
+      schema: addResolversToSchema({ schema, resolvers }),
       introspection: process.env.NODE_ENV !== 'production',
     });
 
