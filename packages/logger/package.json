@@ -10,8 +10,9 @@
   },
   "scripts": {
     "build": "tsup ./index.ts --format esm --dts",
-    "lint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
-    "lint:fix": "pnpm lint --fix"
+    "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@code-sync/eslint-config": "workspace:*",

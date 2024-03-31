@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
+    "eslint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
+    "lint": "pnpm type-check && pnpm stylelint && pnpm eslint",
+    "lint:fix": "pnpm stylelint --fix && pnpm eslint --fix",
     "start": "next start",
     "stylelint": "stylelint --cache --cache-location ./.stylelintcache --cache-strategy content **/*.css",
-    "eslint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
-    "lint": "pnpm stylelint && pnpm eslint",
-    "lint:fix": "pnpm stylelint --fix && pnpm eslint --fix"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@code-sync/logger": "workspace:*",

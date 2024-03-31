@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "pnpm codegen && pnpm type-check && tsup ./src/index.ts && pnpm copy-schema",
+    "build": "pnpm codegen && tsup ./src/index.ts && pnpm copy-schema",
     "codegen": "tsx ./scripts/mergeSchemas.ts && graphql-codegen",
     "copy-schema": "copyfiles -u 2 -f ./src/graphql/schemas/schema.graphql dist/",
     "dev": "tsup ./src/index.ts --watch --onSuccess \"pnpm codegen && pnpm copy-schema && cross-env NODE_ENV=development node dist/index.mjs\"",

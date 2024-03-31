@@ -2,10 +2,10 @@
   "name": "@code-sync/api",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "scripts": {
-    "build": "pnpm type-check && tsup",
+    "build": "tsup",
     "test": "vitest run",
     "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
     "lint:fix": "pnpm lint --fix",
