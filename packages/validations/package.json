@@ -1,0 +1,23 @@
+{
+  "name": "@code-sync/validations",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "scripts": {
+    "build": "tsup ./index.ts --format esm --dts",
+    "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@code-sync/eslint-config": "workspace:*",
+    "@code-sync/typescript-config": "workspace:*",
+    "eslint": "8.57.0",
+    "tsup": "8.0.2",
+    "typescript": "5.3.2"
+  },
+  "dependencies": {
+    "zod": "3.22.4"
+  }
+}

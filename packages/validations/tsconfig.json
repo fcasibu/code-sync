@@ -1,0 +1,12 @@
+{
+  "extends": "@code-sync/typescript-config/node.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
