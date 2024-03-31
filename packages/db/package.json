@@ -9,7 +9,7 @@
     "drop-test-db": ".bin/drop-test-db.sh"
   },
   "scripts": {
-    "build": "pnpm prisma:generate && tsup ./index.ts --format esm --dts",
+    "build": "pnpm prisma:generate && tsup ./index.ts --format esm --dts --minify",
     "prisma": "prisma",
     "prisma:generate": "prisma generate",
     "prisma:generate:test": "dotenv -e .env.test -- pnpm prisma:generate",

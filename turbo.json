@@ -9,7 +9,12 @@
         "dist/**"
       ]
     },
-    "test": {},
+    "test": {
+      "outputs": [],
+      "dependsOn": [
+        "build"
+      ]
+    },
     "format": {},
     "lint": {
       "dependsOn": [

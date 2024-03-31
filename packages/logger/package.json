@@ -9,7 +9,7 @@
     }
   },
   "scripts": {
-    "build": "tsup ./index.ts --format esm --dts",
+    "build": "tsup ./index.ts --format esm --dts --minify",
     "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
     "lint:fix": "pnpm lint --fix",
     "type-check": "tsc --noEmit"
