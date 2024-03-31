@@ -1,5 +1,6 @@
-import { DeepMockProxy, mockDeep, mockReset } from 'vitest-mock-extended';
-import { PrismaClient } from '@code-sync/db';
+import type { DeepMockProxy } from 'vitest-mock-extended';
+import { mockDeep, mockReset } from 'vitest-mock-extended';
+import type { PrismaClient } from '@code-sync/db';
 
 export const testHelper = () => {
   let _prismaClient: DeepMockProxy<PrismaClient> | undefined;

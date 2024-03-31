@@ -1,5 +1,5 @@
-import type { PoolClient } from '@code-sync/api';
-import { poolClient } from '../config';
+import type { PrismaClient } from '@code-sync/db';
+import { prismaClient } from '../config';
 import type { Application } from '../server';
 import { startServer } from '../server';
 
@@ -9,16 +9,16 @@ type UnMaybe<T> = {
 
 export const testHelper = () => {
   let _app: Application | undefined;
-  let _db: PoolClient | undefined;
+  let _prismaClient: PrismaClient | undefined;
 
   const setup = async () => {
-    _db = await poolClient();
-    _app = await startServer({ port: 0, poolClient: _db });
+    _prismaClient = prismaClient();
+    _app = await startServer({ port: 0, prismaClient: _prismaClient });
   };
 
   const teardown = async () => {
     await _app?.apolloServer?.stop();
-    _db?.release();
+    await _prismaClient?.$disconnect();
     _app?.expressServer?.close();
   };
 
@@ -33,13 +33,13 @@ export const testHelper = () => {
 
       return _app as UnMaybe<Application>;
     },
-    get db() {
-      if (!_db)
+    get prismaClient() {
+      if (!_prismaClient)
         throw new Error(
           '`setup` in the testHelper was not invoked. Invoke the `setup` of `testHelper` in either `beforeEach` or `beforeAll`',
         );
 
-      return _db;
+      return _prismaClient;
     },
   };
 };

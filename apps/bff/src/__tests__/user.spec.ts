@@ -1,5 +1,6 @@
 import requestGQL from 'supertest-graphql';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { userSchema } from '@code-sync/validations';
 import type { ResultOf, VariablesOf } from '../utils/gqlHelper';
 import { graphql } from '../utils/gqlHelper';
 import { testHelper } from '../utils/testHelpers';
@@ -28,6 +29,9 @@ describe('resolver#User', () => {
         .query(query)
         .expectNoErrors();
 
+      response.data?.users?.forEach((user) => {
+        expect(() => userSchema.parse(user)).not.toThrow();
+      });
       expect(response.data?.users).not.toHaveLength(0);
       expect(response.data).toMatchSnapshot();
     });
@@ -50,11 +54,11 @@ describe('resolver#User', () => {
         VariablesOf<typeof query>
       >(helper.app.expressServer)
         .query(query)
-        .variables({ input: { id: '1' } })
+        .variables({ input: { id: '0' } })
         .expectNoErrors();
 
-      expect(response.data?.user).not.toBeNull();
-      expect(response.data?.user?.id).toBe('1');
+      expect(() => userSchema.parse(response.data?.user)).not.toThrow();
+      expect(response.data?.user?.id).toBe('0');
       expect(response.data).toMatchSnapshot();
     });
   });

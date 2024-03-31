@@ -3,9 +3,9 @@
 exports[`resolver#User > user > should return a user with the correct structure through their ID 1`] = `
 {
   "user": {
-    "email": "jerry@example.com",
-    "id": "1",
-    "name": "Jerry",
+    "email": "Katharina_Sporer@yahoo.com",
+    "id": "0",
+    "name": "Katharina",
   },
 }
 `;
@@ -14,14 +14,104 @@ exports[`resolver#User > users > should return a list of users with the correct 
 {
   "users": [
     {
-      "email": "jerry@example.com",
-      "id": "1",
-      "name": "Jerry",
+      "email": "Katharina_Sporer@yahoo.com",
+      "id": "0",
+      "name": "Katharina",
     },
     {
-      "email": "george@example.com",
+      "email": "Hayley.Watsica30@hotmail.com",
+      "id": "1",
+      "name": "Hayley",
+    },
+    {
+      "email": "Hudson_Waters@gmail.com",
       "id": "2",
-      "name": "George",
+      "name": "Hudson",
+    },
+    {
+      "email": "Kathryne.Spencer51@gmail.com",
+      "id": "3",
+      "name": "Kathryne",
+    },
+    {
+      "email": "Vito71@hotmail.com",
+      "id": "4",
+      "name": "Vito",
+    },
+    {
+      "email": "Damaris.Sipes91@gmail.com",
+      "id": "5",
+      "name": "Damaris",
+    },
+    {
+      "email": "Sister4@hotmail.com",
+      "id": "6",
+      "name": "Sister",
+    },
+    {
+      "email": "Arden_Hamill@gmail.com",
+      "id": "7",
+      "name": "Arden",
+    },
+    {
+      "email": "Schuyler_Fisher-Strosin@gmail.com",
+      "id": "8",
+      "name": "Schuyler",
+    },
+    {
+      "email": "Adell.Kutch@yahoo.com",
+      "id": "9",
+      "name": "Adell",
+    },
+    {
+      "email": "Olen.Kunde@gmail.com",
+      "id": "10",
+      "name": "Olen",
+    },
+    {
+      "email": "Chelsie.OReilly@gmail.com",
+      "id": "11",
+      "name": "Chelsie",
+    },
+    {
+      "email": "Cara.Swift53@yahoo.com",
+      "id": "12",
+      "name": "Cara",
+    },
+    {
+      "email": "Orion96@yahoo.com",
+      "id": "13",
+      "name": "Orion",
+    },
+    {
+      "email": "Jordan0@hotmail.com",
+      "id": "14",
+      "name": "Jordan",
+    },
+    {
+      "email": "Rosie.McLaughlin36@hotmail.com",
+      "id": "15",
+      "name": "Rosie",
+    },
+    {
+      "email": "Damien.Bednar@gmail.com",
+      "id": "16",
+      "name": "Damien",
+    },
+    {
+      "email": "Eleanora_Sporer6@gmail.com",
+      "id": "17",
+      "name": "Eleanora",
+    },
+    {
+      "email": "Mable18@gmail.com",
+      "id": "18",
+      "name": "Mable",
+    },
+    {
+      "email": "Axel_Jerde13@yahoo.com",
+      "id": "19",
+      "name": "Axel",
     },
   ],
 }

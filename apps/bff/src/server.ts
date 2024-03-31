@@ -3,7 +3,7 @@ import { ApolloServer } from '@apollo/server';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import 'dotenv/config';
 import express from 'express';
-import type { PoolClient } from '@code-sync/api';
+import type { PrismaClient } from '@code-sync/db';
 import logger from '@code-sync/logger';
 import type { Context } from './graphql';
 import { resolvers } from './graphql';
@@ -25,13 +25,13 @@ export interface Application {
 
 interface StartServerProps {
   port: number;
-  poolClient: PoolClient;
+  prismaClient: PrismaClient;
   whiteListedDomains?: string[];
 }
 
 export const startServer = async ({
   port,
-  poolClient,
+  prismaClient,
   whiteListedDomains = [],
 }: StartServerProps): Promise<Application> => {
   try {
@@ -49,7 +49,7 @@ export const startServer = async ({
     app.use(express.json());
 
     app.get('/health', checkHealthMiddleware);
-    app.use('/', graphQLExpressMiddleware(apolloServer, poolClient));
+    app.use('/', graphQLExpressMiddleware(apolloServer, prismaClient));
 
     app.use(errorMiddleware);
 

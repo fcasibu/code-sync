@@ -1,5 +1,5 @@
 import logger from '@code-sync/logger';
-import { poolClient } from './config';
+import { prismaClient } from './config';
 import { startServer } from './server';
 import { isDefined } from './utils';
 
@@ -10,7 +10,7 @@ const whiteListedDomains = [
 
 const { url } = await startServer({
   port: Number(process.env.PORT),
-  poolClient: await poolClient(),
+  prismaClient: prismaClient(),
   whiteListedDomains,
 });
 
