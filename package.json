@@ -4,6 +4,7 @@
     "build": "turbo build",
     "quality-checks": "turbo format lint test build",
     "format": "prettier --cache --cache-location ./.prettiercache --write \"**/*.{ts,tsx,md,graphql,prisma}\"",
+    "prepare": "husky git-hooks",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "test": "turbo test"
@@ -12,6 +13,7 @@
     "@code-sync/eslint-config": "workspace:*",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "eslint": "8.57.0",
+    "husky": "9.0.11",
     "prettier": "3.2.5",
     "prettier-plugin-prisma": "5.0.0",
     "turbo": "latest",
