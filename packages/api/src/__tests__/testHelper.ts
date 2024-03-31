@@ -1,39 +1,27 @@
-import type { PoolClient } from 'pg';
-import { Pool } from 'pg';
-import type { Mocked } from 'vitest';
-import { vi } from 'vitest';
+import { DeepMockProxy, mockDeep, mockReset } from 'vitest-mock-extended';
+import { PrismaClient } from '@code-sync/db';
 
 export const testHelper = () => {
-  let _pool: Mocked<PoolClient> | undefined;
+  let _prismaClient: DeepMockProxy<PrismaClient> | undefined;
 
   const setup = () => {
-    vi.mock('pg', () => {
-      const mockPool = {
-        query: vi.fn(),
-        connect: vi.fn(),
-      };
-
-      return { Pool: vi.fn(() => mockPool) };
-    });
-
-    // same interface
-    _pool = new Pool() as unknown as Mocked<PoolClient>;
+    _prismaClient = mockDeep<PrismaClient>();
   };
 
   const teardown = () => {
-    vi.clearAllMocks();
+    mockReset(_prismaClient);
   };
 
   return {
     setup,
     teardown,
-    get pool() {
-      if (!_pool)
+    get prisma() {
+      if (!_prismaClient)
         throw new Error(
           '`setup` in the testHelper was not invoked. Invoke the `setup` of `testHelper` in either `beforeEach` or `beforeAll`',
         );
 
-      return _pool;
+      return _prismaClient;
     },
   };
 };

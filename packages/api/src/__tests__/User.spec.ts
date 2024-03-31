@@ -11,8 +11,8 @@ afterEach(helper.teardown);
 describe('User#API', () => {
   describe('getUsers', () => {
     it('should get all users', async () => {
-      const mockPool = helper.pool;
-      const userApi = new UserAPI(mockPool);
+      const mockPrisma = helper.prisma;
+      const userApi = new UserAPI(mockPrisma);
 
       const name = faker.person.firstName();
       const mockUsers = [
@@ -23,53 +23,46 @@ describe('User#API', () => {
         },
       ];
 
-      mockPool.query.mockImplementationOnce(() => ({ rows: mockUsers }));
-
+      mockPrisma.user.findMany.mockResolvedValue(mockUsers);
       const result = await userApi.getUsers();
 
-      expect(mockPool.query).toHaveBeenCalledWith(
-        'SELECT * FROM users ORDER BY id ASC',
-      );
-      expect(result).toStrictEqual(mockUsers);
+      expect(mockPrisma.user.findMany).toHaveBeenCalled();
+      expect(result).toEqual(mockUsers);
     });
   });
 
   describe('getUserById', () => {
     it('should get a user by their id', async () => {
-      const mockPool = helper.pool;
-      const userApi = new UserAPI(mockPool);
+      const mockPrisma = helper.prisma;
+      const userApi = new UserAPI(mockPrisma);
 
-      const name = faker.person.firstName();
       const id = faker.string.uuid();
+      const name = faker.person.firstName();
       const mockUser = {
         id,
         name,
         email: faker.internet.email({ firstName: name }),
       };
 
-      mockPool.query.mockImplementationOnce(() => ({ rows: [mockUser] }));
-
+      mockPrisma.user.findUnique.mockResolvedValue(mockUser);
       const result = await userApi.getUserById(id);
 
-      expect(mockPool.query).toHaveBeenCalledWith(
-        'SELECT * FROM users WHERE id = $1',
-        [id],
-      );
+      expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
+        where: { id },
+      });
       expect(result).toStrictEqual(mockUser);
     });
 
     it('should return null if no user was found', async () => {
-      const mockPool = helper.pool;
-      const userApi = new UserAPI(mockPool);
+      const mockPrisma = helper.prisma;
+      const userApi = new UserAPI(mockPrisma);
 
-      mockPool.query.mockImplementationOnce(() => ({ rows: [] }));
-
+      mockPrisma.user.findUnique.mockResolvedValue(null);
       const result = await userApi.getUserById('');
 
-      expect(mockPool.query).toHaveBeenCalledWith(
-        'SELECT * FROM users WHERE id = $1',
-        [''],
-      );
+      expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
+        where: { id: '' },
+      });
       expect(result).toBeNull();
     });
   });

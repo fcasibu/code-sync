@@ -1,22 +1,17 @@
-import type { PoolClient } from 'pg';
+import type { PrismaClient, User } from '@code-sync/db';
 
-export class UserAPI<T> {
-  constructor(private readonly poolClient: PoolClient) {}
+export class UserAPI {
+  constructor(private readonly prisma: PrismaClient) {}
 
-  public async getUsers(): Promise<T[]> {
-    const { rows } = await this.poolClient.query(
-      'SELECT * FROM users ORDER BY id ASC',
-    );
-
-    return rows as T[];
+  public async getUsers(): Promise<User[]> {
+    return this.prisma.user.findMany();
   }
 
-  public async getUserById(id: string): Promise<T | null> {
-    const { rows } = await this.poolClient.query(
-      'SELECT * FROM users WHERE id = $1',
-      [id],
-    );
-
-    return rows.length ? (rows[0] as T) : null;
+  public async getUserById(id: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 }
