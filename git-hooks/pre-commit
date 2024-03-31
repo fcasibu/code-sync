@@ -1,0 +1,10 @@
+#!/bin/sh
+
+pnpm format
+
+pnpm lint
+
+pnpm build
+
+pnpm test
+

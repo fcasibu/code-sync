@@ -10,8 +10,8 @@
     "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,graphql",
     "lint:fix": "pnpm lint --fix",
     "start": "cross-env NODE_ENV=production node dist/index.mjs",
-    "test": "generate-test-db && dotenv -e .env.test -- cross-env NODE_ENV=test vitest run; drop-test-db",
-    "test:update": "generate-test-db && dotenv -e .env.test -- cross-env NODE_ENV=test vitest run -u; drop-test-db",
+    "test": "trap \"drop-test-db\" EXIT; generate-test-db && (dotenv -e .env.test -- cross-env NODE_ENV=test vitest run) || exit 1",
+    "test:update": "trap \"drop-test-db\" EXIT; generate-test-db && (dotenv -e .env.test -- cross-env NODE_ENV=test vitest run -u) || exit 1",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
