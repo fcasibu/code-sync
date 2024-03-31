@@ -1,0 +1,42 @@
+{
+  "name": "@code-sync/db",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "generate-test-db": ".bin/generate-test-db.sh",
+    "drop-test-db": ".bin/drop-test-db.sh"
+  },
+  "scripts": {
+    "build": "pnpm prisma:generate && tsup ./index.ts --format esm --dts",
+    "prisma": "prisma",
+    "prisma:generate": "prisma generate",
+    "prisma:generate:test": "dotenv -e .env.test -- pnpm prisma:generate",
+    "prisma:migrate": "prisma migrate",
+    "prisma:seed": "prisma db seed",
+    "prisma:seed:test": "dotenv -e .env.test -- pnpm prisma:seed",
+    "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit"
+  },
+  "prisma": {
+    "seed": "tsx ./seeds/seed.ts"
+  },
+  "devDependencies": {
+    "@code-sync/eslint-config": "workspace:*",
+    "@code-sync/logger": "workspace:*",
+    "@code-sync/typescript-config": "workspace:*",
+    "@faker-js/faker": "8.4.1",
+    "dotenv-cli": "7.4.1",
+    "eslint": "8.57.0",
+    "prisma": "5.11.0",
+    "tsup": "8.0.2",
+    "tsx": "4.7.1",
+    "typescript": "5.3.2"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "5.11.0",
+    "@prisma/client": "5.11.0"
+  }
+}
