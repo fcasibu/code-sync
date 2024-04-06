@@ -11,10 +11,10 @@
   "scripts": {
     "build": "pnpm prisma:generate && tsup ./index.ts --format esm --dts --minify",
     "prisma": "prisma",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "dotenv -e .env.local -- prisma generate",
     "prisma:generate:test": "dotenv -e .env.test -- pnpm prisma:generate",
-    "prisma:migrate": "prisma migrate",
-    "prisma:seed": "prisma db seed",
+    "prisma:migrate": "dotenv -e .env.local -- prisma migrate",
+    "prisma:seed": "dotenv -e .env.local -- prisma db seed",
     "prisma:seed:test": "dotenv -e .env.test -- pnpm prisma:seed",
     "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts",
     "lint:fix": "pnpm lint --fix",

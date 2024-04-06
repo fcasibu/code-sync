@@ -1,24 +1,33 @@
 import { PrismaClient } from '@prisma/client';
 import logger from '@code-sync/logger';
-import { users } from './user';
+import { documents } from './document.seed';
+import { rooms } from './room.seed';
+import { spectators } from './spectator.seed';
+import { users } from './user.seed';
 
 const prisma = new PrismaClient();
 
 async function main() {
   logger.info('Seeding...');
-  const records = [users];
 
-  await Promise.all(
-    records.map((record) => {
-      logger.info(`Seeding data for ${record.type} model`);
-      const model = prisma[record.type];
+  await prisma.room.deleteMany({});
+  await prisma.user.deleteMany({});
 
-      return model.createMany({
-        data: record.data,
-        skipDuplicates: true,
-      });
-    }),
-  );
+  await prisma.document.createMany({
+    data: documents,
+  });
+
+  await prisma.user.createMany({
+    data: users,
+  });
+
+  await prisma.room.createMany({
+    data: rooms,
+  });
+
+  await prisma.spectator.createMany({
+    data: spectators,
+  });
 }
 
 main()

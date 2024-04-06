@@ -1,0 +1,32 @@
+type Query {
+  rooms: [Room!]
+  room(input: RoomByIdInput!): Room
+}
+
+type Mutation {
+  createRoom(input: CreateRoomInput!): Room
+}
+
+input RoomByIdInput {
+  id: String!
+}
+
+input CreateRoomInput {
+  description: String
+  documentId: String!
+  name: String!
+  ownerId: String!
+}
+
+type Room {
+  createdAt: DateTime
+  description: String
+  document: Document!
+  id: String!
+  isPrivate: Boolean!
+  name: String!
+  owner: User!
+  sessionLimit: DateTime
+  spectatorLimit: Int!
+  spectators: [Spectator!]!
+}

@@ -1,23 +1,89 @@
 type Query {
-  users: [User]
-  user(input: UserByIDInput!): User
+  users: [User!]
+  user(input: UserByIdInput!): User
   test: HelloWorld!
+  rooms: [Room!]
+  room(input: RoomByIdInput!): Room
 }
 
-input UserByIDInput {
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  createRoom(input: CreateRoomInput!): Room
+}
+
+input UserByIdInput {
   id: String!
+}
+
+input CreateUserInput {
+  authId: String!
+  authProvider: String!
+  displayName: String
+  email: String!
+  profilePicture: String
 }
 
 type User {
+  authId: String!
+  authProvider: String!
+  displayName: String
+  email: String!
   id: String!
-  name: String
-  email: String
+  profilePicture: String
+  rooms: [Room!]
+  spectators: [Spectator!]
 }
 
 type HelloWorld {
   helloWorld: String
 }
 
+type Spectator {
+  canEdit: Boolean!
+  createdAt: DateTime!
+  id: String!
+  isGuest: Boolean!
+  name: String!
+}
+
+scalar DateTime
+
+input RoomByIdInput {
+  id: String!
+}
+
+input CreateRoomInput {
+  description: String
+  documentId: String!
+  name: String!
+  ownerId: String!
+}
+
+type Room {
+  createdAt: DateTime
+  description: String
+  document: Document!
+  id: String!
+  isPrivate: Boolean!
+  name: String!
+  owner: User!
+  sessionLimit: DateTime
+  spectatorLimit: Int!
+  spectators: [Spectator!]!
+}
+
+type Document {
+  id: String!
+  content: String!
+  language: String!
+  createdAt: DateTime
+}
+
+enum Language {
+  TYPESCRIPT
+}
+
 schema {
   query: Query
+  mutation: Mutation
 }

@@ -19,7 +19,54 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
-  name  String?
+  id             String    @id @default(uuid())
+  authProvider   String
+  authId         String
+  email          String    @unique
+  displayName    String?
+  profilePicture String?
+  createdAt      DateTime? @default(now())
+
+  rooms      Room[]
+  spectators Spectator[]
+}
+
+model Room {
+  id             String      @id @default(uuid())
+  name           String
+  description    String?
+  isPrivate      Boolean     @default(false)
+  sessionLimit   DateTime?
+  spectatorLimit Int         @default(20)
+  owner          User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId        String
+  document       Document    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId     String
+  spectators     Spectator[]
+  createdAt      DateTime?   @default(now())
+}
+
+model Document {
+  id        String    @id @default(uuid())
+  content   String
+  language  Language
+  createdAt DateTime? @default(now())
+
+  rooms Room[]
+}
+
+model Spectator {
+  id        String   @id @default(uuid())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId    String
+  name      String
+  isGuest   Boolean  @default(true)
+  canEdit   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+enum Language {
+  TYPESCRIPT
 }

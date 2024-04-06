@@ -2,8 +2,8 @@
   "name": "@code-sync/api",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@code-sync/db": "workspace:*",
+    "@code-sync/validations": "workspace:*",
     "pg": "8.11.3"
   }
 }

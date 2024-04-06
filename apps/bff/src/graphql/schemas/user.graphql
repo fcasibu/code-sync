@@ -1,14 +1,30 @@
 type Query {
-  users: [User]
-  user(input: UserByIDInput!): User
+  users: [User!]
+  user(input: UserByIdInput!): User
+}
+type Mutation {
+  createUser(input: CreateUserInput!): User
 }
 
-input UserByIDInput {
+input UserByIdInput {
   id: String!
+}
+
+input CreateUserInput {
+  authId: String!
+  authProvider: String!
+  displayName: String
+  email: String!
+  profilePicture: String
 }
 
 type User {
+  authId: String!
+  authProvider: String!
+  displayName: String
+  email: String!
   id: String!
-  name: String
-  email: String
+  profilePicture: String
+  rooms: [Room!]
+  spectators: [Spectator!]
 }

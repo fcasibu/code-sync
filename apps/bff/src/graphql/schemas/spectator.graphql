@@ -1,0 +1,7 @@
+type Spectator {
+  canEdit: Boolean!
+  createdAt: DateTime!
+  id: String!
+  isGuest: Boolean!
+  name: String!
+}

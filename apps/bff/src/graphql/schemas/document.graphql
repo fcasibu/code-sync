@@ -1,0 +1,10 @@
+type Document {
+  id: String!
+  content: String!
+  language: String!
+  createdAt: DateTime
+}
+
+enum Language {
+  TYPESCRIPT
+}
