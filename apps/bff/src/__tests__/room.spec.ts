@@ -10,46 +10,8 @@ const helper = testHelper();
 beforeAll(helper.setup);
 afterAll(helper.teardown);
 
+// TODO: create helper functions to create initial user for testing
 describe('resolver#Room', () => {
-  describe('rooms', () => {
-    it('should return a list of rooms', async () => {
-      const query = graphql(`
-        query RoomQuery {
-          rooms {
-            id
-            name
-            description
-            document {
-              id
-              content
-              language
-            }
-            owner {
-              id
-              displayName
-              profilePicture
-            }
-            spectators {
-              id
-              name
-              canEdit
-              isGuest
-            }
-          }
-        }
-      `);
-
-      const response = await requestGQL<ResultOf<typeof query>>(
-        helper.app.expressServer,
-      )
-        .query(query)
-        .expectNoErrors();
-
-      expect(response.data?.rooms).not.toHaveLength(0);
-      expect(response.data).toMatchSnapshot();
-    });
-  });
-
   describe('room', () => {
     it('should return a room through their ID', async () => {
       const query = graphql(`
@@ -58,6 +20,9 @@ describe('resolver#Room', () => {
             id
             name
             description
+            isPrivate
+            spectatorLimit
+            sessionLimit
             document {
               id
               content
@@ -100,6 +65,9 @@ describe('resolver#Room', () => {
             id
             name
             description
+            isPrivate
+            spectatorLimit
+            sessionLimit
             document {
               id
               content
@@ -120,19 +88,65 @@ describe('resolver#Room', () => {
         }
       `);
 
-      const document = await helper.prismaClient.document.create({
-        data: {
-          language: 'TYPESCRIPT',
-          content: "console.log('Hello, World!');",
-        },
+      const ownerId = 'user-0';
+      const input: CreateRoomInput = {
+        ownerId,
+        name: 'public room',
+        description: 'This is a public room',
+      };
+
+      const response = await requestGQL<
+        ResultOf<typeof mutation>,
+        VariablesOf<typeof mutation>
+      >(helper.app.expressServer)
+        .mutate(mutation)
+        .variables({
+          input,
+        })
+        .expectNoErrors();
+
+      expect(response.data?.createRoom).toMatchObject({
+        owner: { id: ownerId },
+        name: input.name,
+        isPrivate: false,
       });
+    });
+
+    it('should create a private room and return it', async () => {
+      const mutation = graphql(`
+        mutation RoomMutation($input: CreateRoomInput!) {
+          createPrivateRoom(input: $input) {
+            id
+            name
+            description
+            isPrivate
+            spectatorLimit
+            sessionLimit
+            document {
+              id
+              content
+              language
+            }
+            owner {
+              id
+              displayName
+              profilePicture
+            }
+            spectators {
+              id
+              name
+              canEdit
+              isGuest
+            }
+          }
+        }
+      `);
 
       const ownerId = 'user-0';
       const input: CreateRoomInput = {
         ownerId,
-        documentId: document.id,
-        name: 'test room',
-        description: 'This is a test room',
+        name: 'private room',
+        description: 'This is a private room',
       };
       const response = await requestGQL<
         ResultOf<typeof mutation>,
@@ -144,15 +158,53 @@ describe('resolver#Room', () => {
         })
         .expectNoErrors();
 
-      expect(response.data?.createRoom?.document.language).toMatch(
-        document.language,
-      );
-      expect(response.data?.createRoom?.document.content).toMatch(
-        document.content,
-      );
-      expect(response.data?.createRoom?.document.id).toBe(document.id);
-      expect(response.data?.createRoom?.owner.id).toMatch(/0/i);
-      expect(response.data?.createRoom?.name).toMatch(/test room/i);
+      expect(response.data?.createPrivateRoom).toMatchObject({
+        owner: { id: ownerId },
+        name: input.name,
+        isPrivate: true,
+      });
+    });
+  });
+
+  describe('deleteRoom', () => {
+    it('should delete a room through their ID and return true', async () => {
+      const room = await helper.prismaClient.room.create({
+        data: { name: 'room to delete', ownerId: 'user-0' },
+      });
+
+      const query = graphql(`
+        mutation RoomMutation($roomId: String!) {
+          deleteRoom(roomId: $roomId)
+        }
+      `);
+
+      const response = await requestGQL<
+        ResultOf<typeof query>,
+        VariablesOf<typeof query>
+      >(helper.app.expressServer)
+        .query(query)
+        .variables({ roomId: room.id })
+        .expectNoErrors();
+
+      expect(response.data?.deleteRoom).toBe(true);
+    });
+
+    it('should return false for failed deletion of a non-existing room', async () => {
+      const query = graphql(`
+        mutation RoomMutation($roomId: String!) {
+          deleteRoom(roomId: $roomId)
+        }
+      `);
+
+      const response = await requestGQL<
+        ResultOf<typeof query>,
+        VariablesOf<typeof query>
+      >(helper.app.expressServer)
+        .query(query)
+        .variables({ roomId: 'some room that does not exist' })
+        .expectNoErrors();
+
+      expect(response.data?.deleteRoom).toBe(false);
     });
   });
 });

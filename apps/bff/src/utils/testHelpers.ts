@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import type { PrismaClient } from '@code-sync/db';
 import { prismaClient } from '../config';
 import type { Application } from '../server';
@@ -12,11 +13,13 @@ export const testHelper = () => {
   let _prismaClient: PrismaClient | undefined;
 
   const setup = async () => {
+    vi.useFakeTimers();
     _prismaClient = prismaClient();
     _app = await startServer({ port: 0, prismaClient: _prismaClient });
   };
 
   const teardown = async () => {
+    vi.useRealTimers();
     await _app?.apolloServer?.stop();
     await _prismaClient?.$disconnect();
     _app?.expressServer?.close();

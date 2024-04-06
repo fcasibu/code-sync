@@ -1,1 +1,15 @@
+*
+!**/*.js
+!**/*.jsx
+!**/*.ts
+!**/*.tsx
+!**/*.md
+!**/*.graphql
+!**/*.prisma
+!*/
+
+/apps/visualisation/storybook-static
+/packages/validations/schemas
+coverage/
+.next/
 schema.graphql

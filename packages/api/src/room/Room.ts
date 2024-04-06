@@ -46,4 +46,10 @@ export class RoomAPI {
       include: { owner: true, document: true, spectators: true },
     });
   }
+
+  public async deleteRoom(roomId: string) {
+    return this.prisma.room.delete({
+      where: { id: roomId },
+    });
+  }
 }

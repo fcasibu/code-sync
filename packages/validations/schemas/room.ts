@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteUser, relatedUserSchema, CompleteDocument, relatedDocumentSchema, CompleteSpectator, relatedSpectatorSchema } from "./index"
+import { CompleteUser, relatedUserSchema, CompleteSpectator, relatedSpectatorSchema, CompleteDocument, relatedDocumentSchema } from "./index"
 
 export const roomSchema = z.object({
   id: z.string(),
@@ -9,14 +9,13 @@ export const roomSchema = z.object({
   sessionLimit: z.date().nullish(),
   spectatorLimit: z.number().int(),
   ownerId: z.string(),
-  documentId: z.string(),
   createdAt: z.date().nullish(),
 })
 
 export interface CompleteRoom extends z.infer<typeof roomSchema> {
   owner: CompleteUser
-  document: CompleteDocument
   spectators: CompleteSpectator[]
+  document?: CompleteDocument | null
 }
 
 /**
@@ -26,6 +25,6 @@ export interface CompleteRoom extends z.infer<typeof roomSchema> {
  */
 export const relatedRoomSchema: z.ZodSchema<CompleteRoom> = z.lazy(() => roomSchema.extend({
   owner: relatedUserSchema,
-  document: relatedDocumentSchema,
   spectators: relatedSpectatorSchema.array(),
+  document: relatedDocumentSchema.nullish(),
 }))

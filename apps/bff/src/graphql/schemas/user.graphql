@@ -1,5 +1,4 @@
 type Query {
-  users: [User!]
   user(input: UserByIdInput!): User
 }
 type Mutation {

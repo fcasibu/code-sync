@@ -1,3 +1,19 @@
+type Mutation {
+  joinRoom(input: JoinRoomInput!): Spectator
+  switchSpectatorToCollaborator(input: SpectatorIdInput!): Spectator
+  switchCollaboratorToSpectator(input: SpectatorIdInput!): Spectator
+}
+
+input JoinRoomInput {
+  userId: String
+  roomId: String!
+  name: String!
+}
+
+input SpectatorIdInput {
+  spectatorId: String!
+}
+
 type Spectator {
   canEdit: Boolean!
   createdAt: DateTime!

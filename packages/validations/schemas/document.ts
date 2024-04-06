@@ -7,10 +7,11 @@ export const documentSchema = z.object({
   content: z.string(),
   language: z.nativeEnum(Language),
   createdAt: z.date().nullish(),
+  roomId: z.string(),
 })
 
 export interface CompleteDocument extends z.infer<typeof documentSchema> {
-  rooms: CompleteRoom[]
+  room: CompleteRoom
 }
 
 /**
@@ -19,5 +20,5 @@ export interface CompleteDocument extends z.infer<typeof documentSchema> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const relatedDocumentSchema: z.ZodSchema<CompleteDocument> = z.lazy(() => documentSchema.extend({
-  rooms: relatedRoomSchema.array(),
+  room: relatedRoomSchema,
 }))

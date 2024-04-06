@@ -1,7 +1,7 @@
 import type { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import type { RequestHandler } from 'express';
-import { UserAPI } from '@code-sync/api';
+import { DocumentAPI, RoomAPI, SpectatorAPI, UserAPI } from '@code-sync/api';
 import type { PrismaClient } from '@code-sync/db';
 import type { Context } from '../graphql/context';
 
@@ -10,10 +10,17 @@ export const graphQLExpressMiddleware = (
   prismaClient: PrismaClient,
 ): RequestHandler => {
   const userApi = new UserAPI(prismaClient);
+  const roomApi = new RoomAPI(prismaClient);
+  const documentApi = new DocumentAPI(prismaClient);
+  const spectatorApi = new SpectatorAPI(prismaClient);
+
   return expressMiddleware(apolloServer, {
     // eslint-disable-next-line @typescript-eslint/require-await -- context requires a Promise
     context: async () => {
       return {
+        documentApi,
+        roomApi,
+        spectatorApi,
         userApi,
       };
     },

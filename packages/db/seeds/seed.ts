@@ -13,16 +13,16 @@ async function main() {
   await prisma.room.deleteMany({});
   await prisma.user.deleteMany({});
 
-  await prisma.document.createMany({
-    data: documents,
-  });
-
   await prisma.user.createMany({
     data: users,
   });
 
   await prisma.room.createMany({
     data: rooms,
+  });
+
+  await prisma.document.createMany({
+    data: documents,
   });
 
   await prisma.spectator.createMany({

@@ -37,21 +37,6 @@ const introspection = {
         "name": "Query",
         "fields": [
           {
-            "name": "users",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "User",
-                  "ofType": null
-                }
-              }
-            },
-            "args": []
-          },
-          {
             "name": "user",
             "type": {
               "kind": "OBJECT",
@@ -80,21 +65,6 @@ const introspection = {
                 "kind": "OBJECT",
                 "name": "HelloWorld",
                 "ofType": null
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "rooms",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Room",
-                  "ofType": null
-                }
               }
             },
             "args": []
@@ -149,6 +119,69 @@ const introspection = {
             ]
           },
           {
+            "name": "joinRoom",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Spectator",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "JoinRoomInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "switchSpectatorToCollaborator",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Spectator",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SpectatorIdInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "switchCollaboratorToSpectator",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Spectator",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SpectatorIdInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "createRoom",
             "type": {
               "kind": "OBJECT",
@@ -168,9 +201,104 @@ const introspection = {
                 }
               }
             ]
+          },
+          {
+            "name": "createPrivateRoom",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Room",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CreateRoomInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "deleteRoom",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "roomId",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "createDocument",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Document",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CreateDocumentInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "saveDocument",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Document",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SaveDocumentInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean"
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String"
       },
       {
         "kind": "INPUT_OBJECT",
@@ -188,10 +316,6 @@ const introspection = {
             }
           }
         ]
-      },
-      {
-        "kind": "SCALAR",
-        "name": "String"
       },
       {
         "kind": "INPUT_OBJECT",
@@ -368,6 +492,59 @@ const introspection = {
         "interfaces": []
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "JoinRoomInput",
+        "inputFields": [
+          {
+            "name": "userId",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "roomId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "SpectatorIdInput",
+        "inputFields": [
+          {
+            "name": "spectatorId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
         "kind": "OBJECT",
         "name": "Spectator",
         "fields": [
@@ -436,10 +613,6 @@ const introspection = {
       },
       {
         "kind": "SCALAR",
-        "name": "Boolean"
-      },
-      {
-        "kind": "SCALAR",
         "name": "DateTime"
       },
       {
@@ -469,17 +642,6 @@ const introspection = {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            }
-          },
-          {
-            "name": "documentId",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
             }
           },
           {
@@ -531,12 +693,9 @@ const introspection = {
           {
             "name": "document",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Document",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "Document",
+              "ofType": null
             },
             "args": []
           },
@@ -635,6 +794,62 @@ const introspection = {
         "name": "Int"
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "CreateDocumentInput",
+        "inputFields": [
+          {
+            "name": "language",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "roomId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "SaveDocumentInput",
+        "inputFields": [
+          {
+            "name": "documentId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "content",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
         "kind": "OBJECT",
         "name": "Document",
         "fields": [
@@ -685,15 +900,6 @@ const introspection = {
           }
         ],
         "interfaces": []
-      },
-      {
-        "kind": "ENUM",
-        "name": "Language",
-        "enumValues": [
-          {
-            "name": "TYPESCRIPT"
-          }
-        ]
       }
     ],
     "directives": []

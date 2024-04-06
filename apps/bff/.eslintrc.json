@@ -1,22 +1,14 @@
 {
-  "extends": [
-    "@code-sync/eslint-config/base.json"
-  ],
+  "extends": ["@code-sync/eslint-config/base.json"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "processor": "@graphql-eslint/graphql"
     },
     {
-      "files": [
-        "*.graphql"
-      ],
+      "files": ["*.graphql"],
       "parser": "@graphql-eslint/eslint-plugin",
-      "plugins": [
-        "@graphql-eslint"
-      ],
+      "plugins": ["@graphql-eslint"],
       "rules": {
         "@graphql-eslint/known-type-names": 2
       },

@@ -40,19 +40,19 @@ model Room {
   spectatorLimit Int         @default(20)
   owner          User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId        String
-  document       Document    @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  documentId     String
   spectators     Spectator[]
   createdAt      DateTime?   @default(now())
+  document       Document?
 }
 
+// TODO: rename and should be able to handle file structure
 model Document {
   id        String    @id @default(uuid())
   content   String
   language  Language
   createdAt DateTime? @default(now())
-
-  rooms Room[]
+  room      Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId    String    @unique
 }
 
 model Spectator {

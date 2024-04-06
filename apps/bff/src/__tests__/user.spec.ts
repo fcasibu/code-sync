@@ -11,47 +11,6 @@ beforeAll(helper.setup);
 afterAll(helper.teardown);
 
 describe('resolver#User', () => {
-  describe('users', () => {
-    it('should return a list of users', async () => {
-      const query = graphql(`
-        query UserQuery {
-          users {
-            id
-            displayName
-            email
-            authId
-            authProvider
-            profilePicture
-            rooms {
-              id
-              name
-              owner {
-                id
-                rooms {
-                  __typename
-                }
-                authProvider
-                authId
-                email
-                displayName
-                profilePicture
-              }
-            }
-          }
-        }
-      `);
-
-      const response = await requestGQL<ResultOf<typeof query>>(
-        helper.app.expressServer,
-      )
-        .query(query)
-        .expectNoErrors();
-
-      expect(response.data?.users).not.toHaveLength(0);
-      expect(response.data).toMatchSnapshot();
-    });
-  });
-
   describe('user', () => {
     it('should return a user through their ID', async () => {
       const query = graphql(`
@@ -143,17 +102,13 @@ describe('resolver#User', () => {
         .variables(variables)
         .expectNoErrors();
 
-      expect(response.data?.createUser?.authProvider).toBe(
-        variables.input.authProvider,
-      );
-      expect(response.data?.createUser?.authId).toBe(variables.input.authId);
-      expect(response.data?.createUser?.email).toBe(variables.input.email);
-      expect(response.data?.createUser?.displayName).toBe(
-        variables.input.displayName,
-      );
-      expect(response.data?.createUser?.profilePicture).toBe(
-        variables.input.profilePicture,
-      );
+      expect(response.data?.createUser).toMatchObject({
+        authProvider: variables.input.authProvider,
+        authId: variables.input.authId,
+        email: variables.input.email,
+        displayName: variables.input.displayName,
+        profilePicture: variables.input.profilePicture,
+      });
     });
   });
 });

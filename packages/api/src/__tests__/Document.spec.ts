@@ -21,12 +21,13 @@ describe('Document#API', () => {
         language: Language.TYPESCRIPT,
         content: 'console.log(Hello, World!);',
         createdAt: new Date(),
+        roomId: 'room-0',
       };
 
       mockPrisma.document.create.mockResolvedValue(mockDocument);
       const input = {
         language: Language.TYPESCRIPT,
-        roomId: faker.string.uuid(),
+        roomId: 'room-0',
       };
       const result = await documentApi.createDocument(input);
 
@@ -50,6 +51,7 @@ describe('Document#API', () => {
         language: Language.TYPESCRIPT,
         content: 'console.log(Hello, World!);',
         createdAt: new Date(),
+        roomId: 'room-0',
       };
 
       mockPrisma.document.update.mockResolvedValue(mockDocument);

@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import type { DeepMockProxy } from 'vitest-mock-extended';
 import { mockDeep, mockReset } from 'vitest-mock-extended';
 import type { PrismaClient } from '@code-sync/db';
@@ -7,10 +8,12 @@ export const testHelper = () => {
 
   const setup = () => {
     _prismaClient = mockDeep<PrismaClient>();
+    vi.useFakeTimers();
   };
 
   const teardown = () => {
     mockReset(_prismaClient);
+    vi.useRealTimers();
   };
 
   return {

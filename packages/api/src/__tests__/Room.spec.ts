@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Room } from '@code-sync/db';
 import { RoomAPI } from '../room';
 import { testHelper } from './testHelper';
@@ -23,7 +23,6 @@ describe('Room#API', () => {
           id: faker.string.uuid(),
           name,
           ownerId: faker.string.uuid(),
-          documentId: faker.string.uuid(),
           createdAt: new Date(),
           isPrivate: false,
           description: '',
@@ -51,7 +50,6 @@ describe('Room#API', () => {
         id: faker.string.uuid(),
         name,
         ownerId: faker.string.uuid(),
-        documentId: faker.string.uuid(),
         createdAt: new Date(),
         isPrivate: false,
         description: '',
@@ -96,7 +94,6 @@ describe('Room#API', () => {
         id: faker.string.uuid(),
         name: faker.company.catchPhrase(),
         ownerId: faker.string.uuid(),
-        documentId: faker.string.uuid(),
         createdAt: new Date(),
         isPrivate: false,
         description: '',
@@ -125,7 +122,6 @@ describe('Room#API', () => {
         id: faker.string.uuid(),
         name: faker.company.catchPhrase(),
         ownerId: faker.string.uuid(),
-        documentId: faker.string.uuid(),
         createdAt: new Date(),
         isPrivate: false,
         description: '',
@@ -145,6 +141,32 @@ describe('Room#API', () => {
         include: { owner: true, document: true, spectators: true },
       });
       expect(result).toStrictEqual(mockRoom);
+    });
+  });
+
+  describe('deleteRoom', () => {
+    it('should delete a room by their id', async () => {
+      const mockPrisma = helper.prisma;
+      const roomApi = new RoomAPI(mockPrisma);
+
+      const mockRoom: Room = {
+        id: faker.string.uuid(),
+        name: faker.company.catchPhrase(),
+        ownerId: faker.string.uuid(),
+        createdAt: new Date(),
+        isPrivate: false,
+        description: '',
+        sessionLimit: null,
+        spectatorLimit: 20,
+      };
+
+      mockPrisma.room.delete.mockResolvedValue(mockRoom);
+      const result = await roomApi.deleteRoom(mockRoom.id);
+
+      expect(mockPrisma.room.delete).toHaveBeenCalledWith({
+        where: { id: mockRoom.id },
+      });
+      expect(result).toEqual(mockRoom);
     });
   });
 });

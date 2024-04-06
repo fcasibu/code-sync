@@ -10,37 +10,6 @@ beforeEach(helper.setup);
 afterEach(helper.teardown);
 
 describe('User#API', () => {
-  describe('getUsers', () => {
-    it('should get all users', async () => {
-      const mockPrisma = helper.prisma;
-      const userApi = new UserAPI(mockPrisma);
-
-      const names = Array.from({ length: 10 }, () => faker.person.firstName());
-
-      const mockUsers = names.map(
-        (name, i): User => ({
-          id: `${i}`,
-          displayName: name,
-          email: faker.internet.email({ firstName: name }),
-          profilePicture: faker.image.urlPlaceholder({
-            width: 150,
-            height: 150,
-            text: name,
-          }),
-          authId: faker.string.nanoid(),
-          authProvider: 'github',
-          createdAt: new Date(),
-        }),
-      );
-
-      mockPrisma.user.findMany.mockResolvedValue(mockUsers);
-      const result = await userApi.getUsers();
-
-      expect(mockPrisma.user.findMany).toHaveBeenCalled();
-      expect(result).toEqual(mockUsers);
-    });
-  });
-
   describe('getUserById', () => {
     it('should get a user by their id', async () => {
       const mockPrisma = helper.prisma;

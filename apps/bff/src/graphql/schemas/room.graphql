@@ -1,10 +1,11 @@
 type Query {
-  rooms: [Room!]
   room(input: RoomByIdInput!): Room
 }
 
 type Mutation {
   createRoom(input: CreateRoomInput!): Room
+  createPrivateRoom(input: CreateRoomInput!): Room
+  deleteRoom(roomId: String!): Boolean!
 }
 
 input RoomByIdInput {
@@ -13,7 +14,6 @@ input RoomByIdInput {
 
 input CreateRoomInput {
   description: String
-  documentId: String!
   name: String!
   ownerId: String!
 }
@@ -21,7 +21,7 @@ input CreateRoomInput {
 type Room {
   createdAt: DateTime
   description: String
-  document: Document!
+  document: Document
   id: String!
   isPrivate: Boolean!
   name: String!
