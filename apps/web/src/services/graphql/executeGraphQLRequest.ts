@@ -2,6 +2,10 @@ import type { ResultOf } from 'gql.tada';
 import type { ASTNode, GraphQLError } from 'graphql';
 import { print } from 'graphql';
 import { logger } from '@code-sync/logger';
+import {
+  INTERNAL_HEADER_API_KEY,
+  INTERNAL_HEADER_REVALIDATE_KEY,
+} from '@/constants';
 import { REVALIDATE_TIME } from '@/constants/cache';
 import { env } from '@/env';
 import { isServer } from '@/utils';
@@ -23,8 +27,9 @@ export const executeGraphQLRequest = async <T>(
         method: 'POST',
         headers: {
           ...init.headers,
-          revalidate: `${init.next?.revalidate ?? REVALIDATE_TIME}`,
           'Content-Type': 'application/json',
+          [INTERNAL_HEADER_REVALIDATE_KEY]: `${init.next?.revalidate ?? REVALIDATE_TIME}`,
+          [INTERNAL_HEADER_API_KEY]: env.INTERNAL_HEADER_API_KEY_VALUE,
         },
         next: {
           revalidate: REVALIDATE_TIME,

@@ -1,8 +1,15 @@
 import { getAccessToken } from '@auth0/nextjs-auth0';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { INTERNAL_HEADER_REVALIDATE_KEY } from '@/constants';
 import { env } from '@/env';
+import { isAuthorized, sendUnauthorizedResponse } from '@/utils';
 
 export const POST = async (req: NextRequest) => {
+  if (!isAuthorized(req)) {
+    return sendUnauthorizedResponse();
+  }
+
   const { accessToken } = await getAccessToken().catch(() => ({
     accessToken: '',
   }));
@@ -16,13 +23,13 @@ export const POST = async (req: NextRequest) => {
         Authorization: `Bearer ${accessToken}`,
       },
       next: {
-        revalidate: Number(req.headers.get('revalidate')),
+        revalidate: Number(req.headers.get(INTERNAL_HEADER_REVALIDATE_KEY)),
       },
       body: JSON.stringify(await req.json()),
     });
 
-    return Response.json(await response.json());
+    return NextResponse.json(await response.json());
   } catch (e) {
-    return Response.json({ error: e }, { status: 500 });
+    return NextResponse.json({ error: e }, { status: 500 });
   }
 };

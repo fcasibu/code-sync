@@ -16,6 +16,9 @@ export const env = createEnv({
 
     // Web
     APP_URL: z.string().url(),
+
+    // API header key
+    INTERNAL_HEADER_API_KEY_VALUE: z.string(),
   },
   experimental__runtimeEnv: {},
 });
