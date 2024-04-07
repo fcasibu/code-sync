@@ -4,6 +4,7 @@
     "^(react$)|^(react/(.*)$)",
     "<THIRD_PARTY_MODULES>",
     "^@code-sync/(.*)$",
+    "^@/(.*)$",
     "^[./]"
   ],
   "importOrderSortSpecifiers": true,

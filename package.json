@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "quality-checks": "turbo format lint test build",
+    "quality-checks": "pnpm format:check && turbo lint test build",
+    "format:check": "prettier --cache --cache-location ./.prettiercache --check .",
     "format": "prettier --cache --cache-location ./.prettiercache --write .",
     "prepare": "husky git-hooks",
     "lint": "turbo lint",
