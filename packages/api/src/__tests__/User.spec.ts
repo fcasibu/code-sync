@@ -54,6 +54,55 @@ describe('User#API', () => {
     });
   });
 
+  describe('getUserByProviderAndProviderId', () => {
+    it('should get a user by their auth provider and id', async () => {
+      const mockPrisma = helper.prisma;
+      const userApi = new UserAPI(mockPrisma);
+
+      const authId = faker.string.nanoid();
+      const authProvider = 'github';
+      const id = faker.string.uuid();
+      const name = faker.person.firstName();
+      const mockUser: User = {
+        id,
+        displayName: name,
+        email: faker.internet.email({ firstName: name }),
+        profilePicture: faker.image.urlPlaceholder({
+          width: 150,
+          height: 150,
+          text: name,
+        }),
+        authId,
+        authProvider,
+        createdAt: new Date(),
+      };
+
+      mockPrisma.user.findFirst.mockResolvedValue(mockUser);
+      const result = await userApi.getUserByProviderAndProviderId(
+        authProvider,
+        authId,
+      );
+
+      expect(mockPrisma.user.findFirst).toHaveBeenCalledWith({
+        where: { authProvider, authId },
+      });
+      expect(result).toStrictEqual(mockUser);
+    });
+
+    it('should return null if no user was found', async () => {
+      const mockPrisma = helper.prisma;
+      const userApi = new UserAPI(mockPrisma);
+
+      mockPrisma.user.findUnique.mockResolvedValue(null);
+      const result = await userApi.getUserById('');
+
+      expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
+        where: { id: '' },
+      });
+      expect(result).toBeNull();
+    });
+  });
+
   describe('createUser', () => {
     it('should be able to create a user and return the user itself', async () => {
       const mockPrisma = helper.prisma;

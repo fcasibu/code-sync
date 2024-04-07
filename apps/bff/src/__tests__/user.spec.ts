@@ -55,6 +55,69 @@ describe('resolver#User', () => {
     });
   });
 
+  describe('userByProviderAndProviderId', () => {
+    it('should return a user through their auth provider and id', async () => {
+      const authId = faker.string.nanoid();
+      const authProvider = 'github';
+
+      const user = await helper.prismaClient.user.create({
+        data: {
+          authId,
+          authProvider,
+          email: faker.internet.email(),
+        },
+      });
+
+      const query = graphql(`
+        query UserQuery($provider: String!, $providerId: String!) {
+          userByProviderAndProviderId(
+            provider: $provider
+            providerId: $providerId
+          ) {
+            id
+            displayName
+            email
+            authId
+            authProvider
+            profilePicture
+            rooms {
+              id
+              name
+              owner {
+                id
+                rooms {
+                  __typename
+                }
+                authProvider
+                authId
+                email
+                displayName
+                profilePicture
+              }
+            }
+          }
+        }
+      `);
+
+      const response = await requestGQL<
+        ResultOf<typeof query>,
+        VariablesOf<typeof query>
+      >(helper.app.expressServer)
+        .query(query)
+        .variables({ providerId: authId, provider: authProvider })
+        .expectNoErrors();
+
+      expect(response.data?.userByProviderAndProviderId?.authId).toBe(authId);
+      expect(response.data?.userByProviderAndProviderId?.authProvider).toBe(
+        authProvider,
+      );
+      expect(response.data?.userByProviderAndProviderId?.email).toBe(
+        user.email,
+      );
+      expect(response.data?.userByProviderAndProviderId?.id).toBe(user.id);
+    });
+  });
+
   describe('createUser', () => {
     it('should create a user and return it', async () => {
       const mutation = graphql(`

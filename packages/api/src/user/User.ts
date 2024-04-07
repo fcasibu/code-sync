@@ -12,6 +12,18 @@ export class UserAPI {
     });
   }
 
+  public async getUserByProviderAndProviderId(
+    provider: string,
+    providerId: string,
+  ) {
+    return this.prisma.user.findFirst({
+      where: {
+        authProvider: provider,
+        authId: providerId,
+      },
+    });
+  }
+
   public async createUser(data: z.infer<typeof UserCreateInput>) {
     return this.prisma.user.create({
       data,

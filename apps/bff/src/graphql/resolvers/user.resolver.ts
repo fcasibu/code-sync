@@ -5,6 +5,9 @@ const resolver: Resolvers = {
     user: (_, { input }, { userApi }) => {
       return userApi.getUserById(input.id);
     },
+    userByProviderAndProviderId: (_, { provider, providerId }, { userApi }) => {
+      return userApi.getUserByProviderAndProviderId(provider, providerId);
+    },
   },
 
   Mutation: {

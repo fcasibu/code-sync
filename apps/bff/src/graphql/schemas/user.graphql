@@ -1,5 +1,6 @@
 type Query {
   user(input: UserByIdInput!): User
+  userByProviderAndProviderId(provider: String!, providerId: String!): User
 }
 type Mutation {
   createUser(input: CreateUserInput!): User

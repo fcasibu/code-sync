@@ -33,6 +33,7 @@
         ]
       },
       "rules": {
+        "@typescript-eslint/no-throw-literal": 0,
         "@typescript-eslint/require-await": 1,
         "@typescript-eslint/no-non-null-assertion": 0,
         "no-unused-vars": 0,

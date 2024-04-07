@@ -6,7 +6,7 @@
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
     "lint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
-    "lint:fix": "pnpm stylelint --fix && pnpm eslint --fix"
+    "lint:fix": "pnpm eslint --fix"
   },
   "dependencies": {
     "next": "14.1.4",
