@@ -9,6 +9,7 @@ import type { Context } from './graphql';
 import { resolvers } from './graphql';
 import { schema } from './graphql/schemas';
 import {
+  authMiddleware,
   checkHealthMiddleware,
   corsMiddleware,
   errorMiddleware,
@@ -44,9 +45,10 @@ export const startServer = async ({
 
     const app = express();
 
-    app.use(loggerMiddleware);
+    app.use(loggerMiddleware());
     app.use(corsMiddleware(whiteListedDomains));
     app.use(express.json());
+    app.use(authMiddleware);
 
     app.get('/health', checkHealthMiddleware);
     app.use('/', graphQLExpressMiddleware(apolloServer, prismaClient));

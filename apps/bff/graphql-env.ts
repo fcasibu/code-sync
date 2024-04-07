@@ -58,6 +58,38 @@ const introspection = {
             ]
           },
           {
+            "name": "userByProviderAndProviderId",
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "provider",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "providerId",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "test",
             "type": {
               "kind": "NON_NULL",
@@ -92,6 +124,10 @@ const introspection = {
           }
         ],
         "interfaces": []
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String"
       },
       {
         "kind": "OBJECT",
@@ -295,10 +331,6 @@ const introspection = {
       {
         "kind": "SCALAR",
         "name": "Boolean"
-      },
-      {
-        "kind": "SCALAR",
-        "name": "String"
       },
       {
         "kind": "INPUT_OBJECT",

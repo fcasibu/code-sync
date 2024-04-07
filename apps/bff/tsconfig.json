@@ -1,6 +1,8 @@
 {
   "extends": "@code-sync/typescript-config/node.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "typeRoots": ["./typings"],
     "plugins": [
       {
         "name": "@0no-co/graphqlsp",
@@ -11,10 +13,6 @@
       }
     ]
   },
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["."],
+  "exclude": ["node_modules"]
 }
