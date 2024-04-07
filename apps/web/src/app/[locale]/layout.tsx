@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Providers } from './_providers';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,7 +21,9 @@ export default function LocaleLayout({
 }: Readonly<LocaleLayoutProps>) {
   return (
     <html lang={locale}>
-      <body className={inter.className}>{children}</body>
+      <Providers>
+        <body className={inter.className}>{children}</body>
+      </Providers>
     </html>
   );
 }

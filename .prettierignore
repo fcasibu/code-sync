@@ -11,6 +11,7 @@
 /apps/visualisation/storybook-static
 /packages/validations/schemas
 /apps/bff/src/graphql/types/
+graphql-env.ts
 coverage/
 .next/
 schema.graphql

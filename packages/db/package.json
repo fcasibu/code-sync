@@ -2,14 +2,15 @@
   "name": "@code-sync/db",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "bin": {
     "generate-test-db": ".bin/generate-test-db.sh",
     "drop-test-db": ".bin/drop-test-db.sh"
   },
   "scripts": {
-    "build": "pnpm prisma:generate && tsup ./index.ts --format esm --dts --minify",
+    "build": "pnpm prisma:generate && tsup ./index.ts --format esm,cjs --dts --minify",
     "prisma": "prisma",
     "prisma:generate": "dotenv -e .env.local -- prisma generate",
     "prisma:generate:test": "dotenv -e .env.test -- pnpm prisma:generate",

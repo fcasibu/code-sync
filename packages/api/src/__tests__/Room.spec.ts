@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { Room } from '@code-sync/db';
 import { RoomAPI } from '../room';
 import { testHelper } from './testHelper';

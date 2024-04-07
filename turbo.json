@@ -1,5 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NO_PRETTY_LOGGING",
+    "POSTGRES_DB_URL",
+    "NODE_ENV",
+    "ANALYZE"
+  ],
+  "globalDependencies": [
+    ".env",
+    ".env.local",
+    "tsconfig.json"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": [

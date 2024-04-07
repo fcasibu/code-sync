@@ -3,7 +3,7 @@ import { strict as assert } from 'assert';
 import type { JwtPayload } from 'jsonwebtoken';
 import jwt from 'jsonwebtoken';
 import { JwksClient } from 'jwks-rsa';
-import logger from '@code-sync/logger';
+import { logger } from '@code-sync/logger';
 import { DeferredPromise } from './deferredPromise';
 
 export const verifyToken = (token: string) => {

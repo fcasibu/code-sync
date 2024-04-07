@@ -3,12 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "exports": {
-    ".": {
-      "types": "./index.d.mts",
-      "default": "./base.mjs"
-    }
-  },
+  "main": "./base.js",
+  "module": "./base.mjs",
+  "types": "./index.d.ts",
   "publishConfig": {
     "access": "public"
   },

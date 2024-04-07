@@ -2,10 +2,11 @@
   "name": "@code-sync/validations",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup ./index.ts --format esm --dts --minify",
+    "build": "tsup ./index.ts --format esm,cjs --dts --minify",
     "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts",
     "lint:fix": "pnpm lint --fix",
     "type-check": "tsc --noEmit"

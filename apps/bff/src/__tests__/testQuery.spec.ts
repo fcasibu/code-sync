@@ -2,7 +2,7 @@ import requestGQL from 'supertest-graphql';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { ResultOf } from '../utils/gqlHelper';
 import { graphql } from '../utils/gqlHelper';
-import { testHelper } from '../utils/testHelpers';
+import { testHelper } from './testHelper';
 
 const helper = testHelper();
 

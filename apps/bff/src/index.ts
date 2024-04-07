@@ -1,4 +1,4 @@
-import logger from '@code-sync/logger';
+import { logger } from '@code-sync/logger';
 import { prismaClient } from './config';
 import { startServer } from './server';
 import { isDefined } from './utils';

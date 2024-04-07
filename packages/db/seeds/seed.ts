@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import logger from '@code-sync/logger';
+import { logger } from '@code-sync/logger';
 import { documents } from './document.seed';
 import { rooms } from './room.seed';
 import { spectators } from './spectator.seed';

@@ -1,4 +1,4 @@
-import logger from '@code-sync/logger';
+import { logger } from '@code-sync/logger';
 import type { Resolvers } from '../types';
 
 const resolver: Resolvers = {

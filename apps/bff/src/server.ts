@@ -4,7 +4,7 @@ import { addResolversToSchema } from '@graphql-tools/schema';
 import 'dotenv/config';
 import express from 'express';
 import type { PrismaClient } from '@code-sync/db';
-import logger from '@code-sync/logger';
+import { logger } from '@code-sync/logger';
 import type { Context } from './graphql';
 import { resolvers } from './graphql';
 import { schema } from './graphql/schemas';

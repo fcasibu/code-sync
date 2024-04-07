@@ -9,40 +9,40 @@ type UnMaybe<T> = {
 };
 
 export const testHelper = () => {
-  let _app: Application | undefined;
-  let _prismaClient: PrismaClient | undefined;
+  let app: Application | undefined;
+  let prisma: PrismaClient | undefined;
 
   const setup = async () => {
     vi.useFakeTimers();
-    _prismaClient = prismaClient();
-    _app = await startServer({ port: 0, prismaClient: _prismaClient });
+    prisma = prismaClient();
+    app = await startServer({ port: 0, prismaClient: prisma });
   };
 
   const teardown = async () => {
     vi.useRealTimers();
-    await _app?.apolloServer?.stop();
-    await _prismaClient?.$disconnect();
-    _app?.expressServer?.close();
+    await app?.apolloServer?.stop();
+    await prisma?.$disconnect();
+    app?.expressServer?.close();
   };
 
   return {
     setup,
     teardown,
     get app() {
-      if (!_app)
+      if (!app)
         throw new Error(
           '`setup` in the testHelper was not invoked. Invoke the `setup` of `testHelper` in either `beforeEach` or `beforeAll`',
         );
 
-      return _app as UnMaybe<Application>;
+      return app as UnMaybe<Application>;
     },
     get prismaClient() {
-      if (!_prismaClient)
+      if (!prisma)
         throw new Error(
           '`setup` in the testHelper was not invoked. Invoke the `setup` of `testHelper` in either `beforeEach` or `beforeAll`',
         );
 
-      return _prismaClient;
+      return prisma;
     },
   };
 };

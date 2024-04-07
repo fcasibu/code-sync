@@ -598,7 +598,7 @@ const introspection = {
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "SCALAR",
-                "name": "DateTime",
+                "name": "Date",
                 "ofType": null
               }
             },
@@ -645,7 +645,7 @@ const introspection = {
       },
       {
         "kind": "SCALAR",
-        "name": "DateTime"
+        "name": "Date"
       },
       {
         "kind": "INPUT_OBJECT",
@@ -708,7 +708,7 @@ const introspection = {
             "name": "createdAt",
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Date",
               "ofType": null
             },
             "args": []
@@ -783,7 +783,7 @@ const introspection = {
             "name": "sessionLimit",
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Date",
               "ofType": null
             },
             "args": []
@@ -925,7 +925,7 @@ const introspection = {
             "name": "createdAt",
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Date",
               "ofType": null
             },
             "args": []

@@ -1,6 +1,6 @@
 import type { ErrorRequestHandler } from 'express';
 import type { GraphQLError } from 'graphql';
-import logger from '@code-sync/logger';
+import { logger } from '@code-sync/logger';
 
 export const errorMiddleware: ErrorRequestHandler = (err, _req, res, _next) => {
   logger.error(

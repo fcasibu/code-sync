@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { Language } from '@code-sync/db';
 import type { ResultOf, VariablesOf } from '../utils/gqlHelper';
 import { graphql } from '../utils/gqlHelper';
-import { testHelper } from '../utils/testHelpers';
+import { testHelper } from './testHelper';
 
 const helper = testHelper();
 

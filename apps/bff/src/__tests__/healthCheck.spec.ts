@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { testHelper } from '../utils/testHelpers';
+import { testHelper } from './testHelper';
 
 const helper = testHelper();
 
