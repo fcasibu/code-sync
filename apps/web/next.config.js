@@ -34,7 +34,7 @@ const baseConfig = {
 
 const withNextIntl = createNextIntlPlugin('./src/i18n.ts');
 const withBundleAnalyzer = createBundleAnalyzerPlugin({
-  enabled: process.env['ANALYZE'] === 'true',
+  enabled: process.env.ANALYZE === 'true',
 });
 
 const plugins = [withNextIntl, withBundleAnalyzer];
