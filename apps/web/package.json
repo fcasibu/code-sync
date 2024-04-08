@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build:analyze": "BUILD_ANALYZE=true next build",
+    "build:analyze": "ANALYZE=true next build",
     "dev": "cross-env NO_PRETTY_LOGGING=true next dev",
     "eslint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
     "lint": "pnpm type-check && pnpm stylelint && pnpm eslint",
