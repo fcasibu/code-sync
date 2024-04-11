@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { graphql } from '@/utils';
 import {
   executeGraphQLRequest,
@@ -20,10 +21,14 @@ export const getUserByProviderAndProviderId = async (
     typeof userByProviderAndProviderIdQuery
   >(
     {
+      headers: {
+        cookie: cookies().toString(),
+      },
       body: getRequestBody(userByProviderAndProviderIdQuery, {
         provider,
         providerId,
       }),
+      next: { revalidate: 0 },
     },
     'Something went wrong with the getUserByProviderAndProviderId query',
   );

@@ -10,4 +10,5 @@ export interface Context {
   roomApi: RoomAPI;
   documentApi: DocumentAPI;
   spectatorApi: SpectatorAPI;
+  isAuthorized: boolean;
 }

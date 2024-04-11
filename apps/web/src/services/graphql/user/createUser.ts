@@ -1,4 +1,5 @@
 import type { VariablesOf } from 'gql.tada';
+import { cookies } from 'next/headers';
 import { graphql } from '@/utils';
 import {
   executeGraphQLRequest,
@@ -20,7 +21,13 @@ export const createUser = async (
     typeof createUserMutation
   >(
     {
+      headers: {
+        cookie: cookies().toString(),
+      },
       body: getRequestBody(createUserMutation, variables),
+      next: {
+        revalidate: 0,
+      },
     },
     'Something went wrong with the createUser mutation',
   );

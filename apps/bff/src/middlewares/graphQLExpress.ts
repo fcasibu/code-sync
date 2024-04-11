@@ -15,14 +15,14 @@ export const graphQLExpressMiddleware = (
   const spectatorApi = new SpectatorAPI(prismaClient);
 
   return expressMiddleware(apolloServer, {
-    // eslint-disable-next-line @typescript-eslint/require-await -- context requires a Promise
-    context: async () => {
-      return {
+    context: ({ res }) => {
+      return Promise.resolve({
         documentApi,
         roomApi,
         spectatorApi,
         userApi,
-      };
+        isAuthorized: res.locals.isAuthorized,
+      });
     },
   });
 };
