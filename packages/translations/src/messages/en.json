@@ -1,5 +1,18 @@
 {
-  "Home": {
-    "title": "Hello, World!"
+  "Generic": {
+    "siteTitle": "Code Sync"
+  },
+  "Navigation": {
+    "links": {
+      "projects": "Projects",
+      "members": "Members",
+      "chat": "Chat"
+    },
+    "userMenu": {
+      "toggleUserMenu": "Toggle user menu",
+      "menuLabel": "My Account",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
   }
 }

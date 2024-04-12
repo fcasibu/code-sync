@@ -2,7 +2,9 @@
   "name": "@code-sync/ui",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "./index.ts",
   "scripts": {
+    "dev": "tcm -p 'src/**/*.css' -w -c .",
     "eslint": "eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,tsx",
     "lint": "pnpm type-check && pnpm eslint",
     "lint:fix": "pnpm lint --fix",
@@ -10,11 +12,24 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@code-sync/stylelint-config": "workspace:*",
     "@code-sync/eslint-config": "workspace:*",
+    "@code-sync/stylelint-config": "workspace:*",
     "@code-sync/typescript-config": "workspace:*",
+    "@types/react": "18.2.73",
+    "autoprefixer": "10.0.1",
+    "clsx": "2.1.0",
     "eslint": "8.57.0",
+    "postcss": "8.4.38",
     "stylelint": "16.3.1",
+    "tailwindcss": "3.4.3",
+    "typed-css-modules": "0.9.1",
     "typescript": "5.3.2"
+  },
+  "dependencies": {
+    "@radix-ui/react-dropdown-menu": "2.0.6",
+    "@radix-ui/react-slot": "1.0.2",
+    "class-variance-authority": "0.7.0",
+    "lucide-react": "0.367.0",
+    "next": "14.2.0"
   }
 }

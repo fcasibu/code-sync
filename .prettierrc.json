@@ -10,7 +10,8 @@
   "importOrderSortSpecifiers": true,
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-prisma"
+    "prettier-plugin-prisma",
+    "prettier-plugin-tailwindcss"
   ],
   "semi": true,
   "singleQuote": true

@@ -1,0 +1,11 @@
+:where(.content) {
+  @apply rounded-md
+  border
+  border-zinc-900
+  bg-zinc-950
+  p-2;
+}
+
+:where(.separator) {
+  @apply my-1 h-[1px] bg-zinc-900;
+}

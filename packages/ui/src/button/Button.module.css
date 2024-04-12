@@ -1,0 +1,52 @@
+:where(.base) {
+  @apply inline-flex
+    h-full
+    items-center
+    justify-center
+    whitespace-nowrap
+    rounded-md
+    px-2
+    transition-colors;
+
+  &:disabled {
+    @apply pointer-events-none
+      opacity-50;
+  }
+}
+
+:where(.default) {
+  @apply bg-zinc-900
+    text-sm
+    font-medium
+    text-white;
+
+  &:hover {
+    @apply bg-zinc-800/90;
+  }
+}
+
+:where(.outline) {
+  @apply border
+    border-zinc-700;
+
+  &:hover,
+  &:focus-visible {
+    @apply bg-zinc-900;
+  }
+}
+
+:where(.ghost) {
+  &:hover,
+  &:focus-visible {
+    @apply bg-zinc-900;
+  }
+}
+
+:where(.link) {
+  @apply underline-offset-4;
+
+  &:hover,
+  &:focus-visible {
+    @apply underline;
+  }
+}

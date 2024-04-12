@@ -1,11 +1,14 @@
+import { withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
 import type { NextRequest, NextResponse } from 'next/server';
 import { createIntlMiddleware } from '@code-sync/translations';
 
-export default function middleware(request: NextRequest): NextResponse {
+export default withMiddlewareAuthRequired(function middleware(
+  request: NextRequest,
+): NextResponse {
   const response = createIntlMiddleware(request);
 
   return response;
-}
+});
 
 export const config = {
   matcher: [

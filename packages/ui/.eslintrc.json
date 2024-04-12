@@ -1,5 +1,5 @@
 {
   "extends": [
-    "@code-sync/eslint-config/base.json"
+    "@code-sync/eslint-config/react.json"
   ]
 }

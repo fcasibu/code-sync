@@ -2,7 +2,7 @@ const createBundleAnalyzerPlugin = require('@next/bundle-analyzer');
 const createNextIntlPlugin = require('next-intl/plugin');
 const securityHeaders = require('./securityHeaders');
 
-const packages = ['@code-sync/translations'];
+const packages = ['@code-sync/translations', '@code-sync/ui'];
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
@@ -10,7 +10,6 @@ const baseConfig = {
   transpilePackages: packages,
   experimental: {
     optimizePackageImports: [...packages, 'next-intl'],
-    typedRoutes: true,
     serverComponentsExternalPackages: ['@code-sync/logger'],
   },
   logging: {

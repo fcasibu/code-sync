@@ -1,7 +1,14 @@
-'use client';
-
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { NextIntlProvider } from '@/providers';
 
-export function Providers({ children }: Readonly<React.PropsWithChildren>) {
-  return <UserProvider>{children}</UserProvider>;
+interface ProvidersProps extends React.PropsWithChildren {
+  locale: string;
 }
+
+export const Providers = ({ children, locale }: Readonly<ProvidersProps>) => {
+  return (
+    <UserProvider>
+      <NextIntlProvider locale={locale}>{children}</NextIntlProvider>
+    </UserProvider>
+  );
+};

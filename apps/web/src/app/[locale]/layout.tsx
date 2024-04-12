@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Header } from '@/components';
 import { Providers } from './_providers';
 import './globals.css';
 
@@ -15,15 +16,20 @@ interface LocaleLayoutProps {
   params: { locale: string };
 }
 
-export default function LocaleLayout({
+const LocaleLayout = ({
   children,
   params: { locale },
-}: Readonly<LocaleLayoutProps>) {
+}: Readonly<LocaleLayoutProps>) => {
   return (
     <html lang={locale}>
-      <Providers>
-        <body className={inter.className}>{children}</body>
+      <Providers locale={locale}>
+        <body className={inter.className}>
+          <Header />
+          <main>{children}</main>
+        </body>
       </Providers>
     </html>
   );
-}
+};
+
+export default LocaleLayout;

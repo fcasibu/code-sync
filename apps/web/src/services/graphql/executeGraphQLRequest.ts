@@ -1,4 +1,4 @@
-import type { ResultOf } from 'gql.tada';
+import type { ResultOf, TadaDocumentNode } from 'gql.tada';
 import type { ASTNode, GraphQLError } from 'graphql';
 import { print } from 'graphql';
 import { logger } from '@code-sync/logger';
@@ -10,12 +10,16 @@ import { REVALIDATE_TIME } from '@/constants/cache';
 import { env } from '@/env';
 import { isServer } from '@/utils';
 
-interface Result<T> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface Result<T extends TadaDocumentNode<any, any>> {
   data: ResultOf<T> | null;
   errors: GraphQLError[] | null;
 }
 
-export const executeGraphQLRequest = async <T>(
+export const executeGraphQLRequest = async <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends TadaDocumentNode<any, any>,
+>(
   init: RequestInit,
   errorLogMessage: string,
 ): Promise<Result<T>> => {

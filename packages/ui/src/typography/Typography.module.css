@@ -1,0 +1,61 @@
+:where(.h1) {
+  @apply mb-2 
+    text-3xl 
+    font-bold 
+    leading-tight
+    md:text-4xl 
+    lg:text-5xl;
+}
+
+:where(.h2) {
+  @apply mb-2 
+    text-2xl 
+    font-bold 
+    leading-tight 
+    md:text-3xl 
+    lg:text-4xl;
+}
+
+:where(.h3) {
+  @apply mb-2 
+    text-xl 
+    font-bold 
+    leading-tight 
+    md:text-2xl 
+    lg:text-3xl;
+}
+
+:where(.h4) {
+  @apply mb-2 
+    text-lg 
+    font-bold 
+    leading-tight 
+    md:text-xl 
+    lg:text-2xl;
+}
+
+:where(.h5) {
+  @apply mb-2 
+    text-base 
+    font-bold 
+    leading-tight 
+    md:text-lg 
+    lg:text-xl;
+}
+
+:where(.h6) {
+  @apply mb-2 
+    text-sm 
+    font-bold 
+    leading-tight 
+    md:text-base 
+    lg:text-lg;
+}
+
+:where(.text) {
+  @apply mb-2 
+    text-base 
+    font-normal 
+    leading-relaxed 
+    last:m-0;
+}

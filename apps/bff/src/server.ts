@@ -50,7 +50,7 @@ export const startServer = async ({
     app.use(express.json());
     app.use(authMiddleware);
 
-    app.get('/health', checkHealthMiddleware);
+    app.get('/health', checkHealthMiddleware(prismaClient));
     app.use('/', graphQLExpressMiddleware(apolloServer, prismaClient));
 
     app.use(errorMiddleware);

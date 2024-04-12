@@ -16,3 +16,6 @@ public/dist
 .stylelintcache
 
 *storybook.log
+
+**/*.css.d.ts
+

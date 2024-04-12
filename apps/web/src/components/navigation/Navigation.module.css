@@ -1,0 +1,51 @@
+.navigation {
+  @apply flex
+    w-full 
+    items-center 
+    justify-between;
+}
+
+.links {
+  @apply flex
+    items-center
+    gap-2;
+}
+
+.link {
+  @apply flex
+    items-center
+    gap-2
+    p-0;
+
+  .text {
+    @apply text-xs;
+  }
+}
+
+.userMenuToggle {
+  @apply flex 
+    aspect-square
+    items-center 
+    justify-center
+    rounded-full 
+    border 
+    border-zinc-500;
+
+  &:hover {
+    @apply bg-zinc-900;
+  }
+}
+
+.userMenuLink {
+  @apply inline-block 
+    w-full;
+
+  > * {
+    @apply text-xs;
+  }
+}
+
+.userMenuLabel {
+  @apply text-xs 
+    font-bold;
+}

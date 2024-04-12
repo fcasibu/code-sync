@@ -19,6 +19,7 @@ const userQuery = graphql(`
     }
   }
 `);
+
 export const getUserById = async (id: string) => {
   const { data, errors } = await executeGraphQLRequest<typeof userQuery>(
     {

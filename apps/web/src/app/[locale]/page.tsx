@@ -2,14 +2,22 @@
 
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Link from 'next/link';
+import { Button, Gutter } from '@code-sync/ui';
+import { CodeEditor } from '@/components';
 
-export default function Home() {
+const Home = () => {
   const { user } = useUser();
-
   return (
-    <main className="text-4xl">
-      <Link href="/api/auth/login">Login</Link>
+    <main>
+      <Gutter>
+        <Button variant="link" asChild>
+          <Link href="/api/auth/login">Login</Link>
+        </Button>
+      </Gutter>
+      <CodeEditor initialCode='console.log("Hello, World!");' />
       {JSON.stringify(user)}
     </main>
   );
-}
+};
+
+export default Home;

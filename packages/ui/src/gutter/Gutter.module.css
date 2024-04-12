@@ -1,0 +1,4 @@
+:where(.gutter) {
+  @apply px-3 
+    lg:px-4;
+}

@@ -6,6 +6,7 @@
 !**/*.md
 !**/*.graphql
 !**/*.prisma
+!**/*.css
 !*/
 
 /apps/visualisation/storybook-static
@@ -15,3 +16,4 @@ graphql-env.ts
 coverage/
 .next/
 schema.graphql
+**/*.d.ts
