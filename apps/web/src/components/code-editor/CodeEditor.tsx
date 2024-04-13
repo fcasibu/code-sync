@@ -19,7 +19,6 @@ export const CodeEditor = ({ initialCode }: Readonly<CodeEditorProps>) => {
   return (
     <CodeMirror
       value={code}
-      height="100%"
       theme={githubDark}
       extensions={[javascript()]}
       onChange={handleChange}

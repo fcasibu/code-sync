@@ -1,6 +1,7 @@
 {
   "Generic": {
-    "siteTitle": "Code Sync"
+    "siteTitle": "Code Sync",
+    "close": "Close"
   },
   "Navigation": {
     "links": {

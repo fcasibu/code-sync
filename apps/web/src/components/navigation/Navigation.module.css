@@ -22,6 +22,14 @@
   }
 }
 
+.linkHighlight {
+  @apply underline;
+
+  .text {
+    @apply font-bold;
+  }
+}
+
 .userMenuToggle {
   @apply flex 
     aspect-square

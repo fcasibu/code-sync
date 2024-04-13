@@ -18,4 +18,4 @@ public/dist
 *storybook.log
 
 **/*.css.d.ts
-
+tsconfig.tsbuildinfo

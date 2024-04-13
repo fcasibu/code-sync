@@ -42,10 +42,7 @@ export const executeGraphQLRequest = async <
       },
     );
 
-    const { data, errors } = (await response.json()) as {
-      data: ResultOf<T>;
-      errors?: GraphQLError[];
-    };
+    const { data, errors } = (await response.json()) as Result<T>;
 
     if (errors) throw errors;
 

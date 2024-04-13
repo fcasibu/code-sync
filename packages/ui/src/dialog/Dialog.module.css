@@ -1,0 +1,19 @@
+:where(.dialogOverlay) {
+  @apply fixed
+    inset-0
+    z-50
+    bg-black/80;
+}
+
+:where(.dialogClose) {
+  @apply absolute
+    right-4
+    top-4;
+}
+
+:where(.dialogContent) {
+  @apply fixed
+    left-[50%]
+    top-[50%]
+    z-50;
+}

@@ -1,14 +1,13 @@
 import createMiddleware from 'next-intl/middleware';
 import type { NextRequest, NextResponse } from 'next/server';
-import { locales } from './locale-helper';
+import { localePrefix, locales } from './locale-helper';
 
 export function createIntlMiddleware(request: NextRequest): NextResponse {
   const defaultLocale = 'en';
   const handleI18nRouting = createMiddleware({
     locales,
     defaultLocale,
-    localeDetection: false,
-    localePrefix: 'as-needed',
+    localePrefix,
   });
 
   const response = handleI18nRouting(request);
