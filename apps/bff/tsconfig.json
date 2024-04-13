@@ -2,6 +2,11 @@
   "extends": "@code-sync/typescript-config/node.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "typeRoots": ["./typings"],
     "plugins": [
       {

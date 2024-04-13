@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import type { PrismaClient } from '@code-sync/db';
-import { prismaClient } from '../config';
-import type { Application } from '../server';
-import { startServer } from '../server';
+import { prismaClient } from '@/config';
+import type { Application } from '@/server';
+import { startServer } from '@/server';
 
 type UnMaybe<T> = {
   [P in keyof T]-?: NonNullable<T[P]>;

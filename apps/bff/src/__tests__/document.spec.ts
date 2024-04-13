@@ -1,9 +1,9 @@
-import type { CreateDocumentInput, SaveDocumentInput } from 'src/graphql/types';
 import requestGQL from 'supertest-graphql';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { Language } from '@code-sync/db';
-import type { ResultOf, VariablesOf } from '../utils/gqlHelper';
-import { graphql } from '../utils/gqlHelper';
+import type { CreateDocumentInput, SaveDocumentInput } from '@/graphql/types';
+import type { ResultOf, VariablesOf } from '@/utils';
+import { graphql } from '@/utils';
 import { testHelper } from './testHelper';
 
 const helper = testHelper();

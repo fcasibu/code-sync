@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { verifyToken } from '../utils/verifyToken';
+import { verifyToken } from '@/utils';
 
 export const authMiddleware: RequestHandler = async (req, res, next) => {
   res.locals.isAuthorized = false;

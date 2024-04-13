@@ -3,7 +3,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 import type { RequestHandler } from 'express';
 import { DocumentAPI, RoomAPI, SpectatorAPI, UserAPI } from '@code-sync/api';
 import type { PrismaClient } from '@code-sync/db';
-import type { Context } from '../graphql/context';
+import type { Context } from '@/graphql';
 
 export const graphQLExpressMiddleware = (
   apolloServer: ApolloServer<Context>,

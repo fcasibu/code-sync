@@ -1,5 +1,5 @@
 import cors from 'cors';
-import { CorsUnsafeDomainError } from '../errors/corsError';
+import { CorsUnsafeDomainError } from '@/errors';
 
 export const corsMiddleware = (
   whiteListedDomains: (string | undefined)[] = [],
