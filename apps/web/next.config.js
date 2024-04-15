@@ -1,6 +1,7 @@
 const createBundleAnalyzerPlugin = require('@next/bundle-analyzer');
 const createNextIntlPlugin = require('next-intl/plugin');
 const securityHeaders = require('./securityHeaders');
+const path = require('path');
 
 const packages = ['@code-sync/translations', '@code-sync/ui'];
 
@@ -8,9 +9,11 @@ const packages = ['@code-sync/translations', '@code-sync/ui'];
 const baseConfig = {
   reactStrictMode: true,
   transpilePackages: packages,
+  output: 'standalone',
   experimental: {
     optimizePackageImports: [...packages, 'next-intl'],
     serverComponentsExternalPackages: ['@code-sync/logger'],
+    outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   logging: {
     fetches: {
