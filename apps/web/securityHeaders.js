@@ -2,7 +2,7 @@ const cspConfig = {
   'default-src': ['none'],
   'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
   'connect-src': ["'self'", process.env.BFF_URL],
-  'img-src': ["'self'"],
+  'img-src': ["'self'", 'blob:'],
   'style-src': ["'self'", "'unsafe-inline'"],
   'base-uri': ["'self'"],
   'form-action': ["'self'"],
@@ -23,28 +23,37 @@ const csp = Object.entries(cspConfig)
 
 module.exports = [
   {
-    key: 'Content-Security-Policy',
-    value: csp,
-  },
-  {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload',
-  },
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY',
-  },
-  {
-    key: 'X-XSS-Protection',
-    value: '1; mode=block',
-  },
+    source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    headers: [
+      {
+        key: 'Content-Security-Policy',
+        value: csp,
+      },
+      {
+        key: 'Strict-Transport-Security',
+        value: 'max-age=31536000; includeSubDomains; preload',
+      },
+      {
+        key: 'X-Frame-Options',
+        value: 'DENY',
+      },
+      {
+        key: 'X-XSS-Protection',
+        value: '1; mode=block',
+      },
 
-  {
-    key: 'X-Content-Type-Options',
-    value: 'nosniff',
-  },
-  {
-    key: 'Referrer-Policy',
-    value: 'strict-origin-when-cross-origin',
+      {
+        key: 'X-Content-Type-Options',
+        value: 'nosniff',
+      },
+      {
+        key: 'Referrer-Policy',
+        value: 'strict-origin-when-cross-origin',
+      },
+    ],
+    missing: [
+      { type: 'header', key: 'next-router-prefetch' },
+      { type: 'header', key: 'purpose', value: 'prefetch' },
+    ],
   },
 ];

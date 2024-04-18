@@ -1,6 +1,7 @@
 const createBundleAnalyzerPlugin = require('@next/bundle-analyzer');
 const createNextIntlPlugin = require('next-intl/plugin');
 const securityHeaders = require('./securityHeaders');
+const cacheHeaders = require('./cacheHeaders');
 const path = require('path');
 
 const packages = ['@code-sync/translations', '@code-sync/ui'];
@@ -24,16 +25,7 @@ const baseConfig = {
     ignoreDuringBuilds: true,
   },
   async headers() {
-    return [
-      {
-        source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
-        headers: securityHeaders,
-        missing: [
-          { type: 'header', key: 'next-router-prefetch' },
-          { type: 'header', key: 'purpose', value: 'prefetch' },
-        ],
-      },
-    ];
+    return [...securityHeaders, ...cacheHeaders];
   },
 };
 
