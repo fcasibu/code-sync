@@ -39,7 +39,6 @@ COPY turbo.json turbo.json
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
 RUN turbo build --filter=@code-sync/bff...
-
 FROM base AS runner
 WORKDIR /app
 
@@ -53,4 +52,4 @@ COPY --from=installer /app .
 
 EXPOSE 4000
 
-CMD node apps/bff/dist/index.mjs
+CMD node apps/bff/dist/index.js
