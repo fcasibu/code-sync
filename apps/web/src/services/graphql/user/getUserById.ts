@@ -27,11 +27,9 @@ export const getUserById = async (id: string) => {
         cookie: cookies().toString(),
       },
       body: getRequestBody(userQuery, { input: { id } }),
-      next: {
-        revalidate: 0,
-      },
+      next: { revalidate: 0 },
     },
-    'Something went wrong with the getUser query',
+    'Something went wrong with the getUserById query',
   );
 
   return { user: data?.user, errors };

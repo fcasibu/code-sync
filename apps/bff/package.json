@@ -6,10 +6,10 @@
     "build": "tsup ./src/index.ts && pnpm copy-schema",
     "codegen": "tsx ./scripts/mergeSchemas.ts && graphql-codegen",
     "copy-schema": "copyfiles -u 2 -f ./src/graphql/schemas/schema.graphql dist/",
-    "dev": "tsup ./src/index.ts --watch --onSuccess \"pnpm codegen && pnpm copy-schema && cross-env NODE_ENV=development node dist/index.mjs\"",
+    "dev": "tsup ./src/index.ts --watch --onSuccess \"pnpm codegen && pnpm copy-schema && cross-env NODE_ENV=development node dist/index.js\"",
     "lint": "pnpm type-check && eslint --cache --cache-location ./.eslintcache --cache-strategy content . --ext ts,graphql",
     "lint:fix": "pnpm lint --fix",
-    "start": "cross-env NODE_ENV=production node dist/index.mjs",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
     "test": "trap drop-test-db EXIT; generate-test-db && (dotenv -e .env.test -- cross-env NODE_ENV=test vitest run) || exit 1",
     "test:update": "trap drop-test-db EXIT; generate-test-db && (dotenv -e .env.test -- cross-env NODE_ENV=test vitest run -u) || exit 1",
     "type-check": "tsc --noEmit"

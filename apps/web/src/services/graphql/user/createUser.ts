@@ -25,9 +25,7 @@ export const createUser = async (
         cookie: cookies().toString(),
       },
       body: getRequestBody(createUserMutation, variables),
-      next: {
-        revalidate: 0,
-      },
+      next: { revalidate: 0 },
     },
     'Something went wrong with the createUser mutation',
   );

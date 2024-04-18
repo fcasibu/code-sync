@@ -1,15 +1,10 @@
-import { headers } from 'next/headers';
+'use client';
+
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { CodeEditor } from '@/components';
-import { getUserById } from '@/services';
 
-export const dynamic = 'force-dynamic';
-
-const Home = async () => {
-  const h = headers();
-
-  console.log(JSON.stringify(h));
-
-  const { user } = await getUserById('user-0');
+const Home = () => {
+  const { user } = useUser();
 
   return (
     <main>
