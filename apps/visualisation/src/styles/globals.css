@@ -1,6 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer tailwind_base, tailwind_components_utilities;
+
+@layer tailwind_base {
+  @tailwind base;
+}
+
+@layer tailwind_components_utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -14,6 +21,11 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -30,4 +42,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.cm-editor {
+  @apply text-xs;
 }

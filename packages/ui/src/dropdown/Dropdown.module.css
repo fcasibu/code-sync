@@ -3,7 +3,8 @@
   border
   border-zinc-900
   bg-zinc-950
-  p-2;
+  p-2
+  text-white;
 }
 
 :where(.separator) {
