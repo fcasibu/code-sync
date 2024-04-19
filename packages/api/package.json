@@ -15,7 +15,6 @@
     "@code-sync/eslint-config": "workspace:*",
     "@code-sync/stylelint-config": "workspace:*",
     "@code-sync/typescript-config": "workspace:*",
-    "@code-sync/vitest-config": "workspace:*",
     "@faker-js/faker": "8.4.1",
     "@types/node": "20.11.30",
     "@types/pg": "8.11.4",

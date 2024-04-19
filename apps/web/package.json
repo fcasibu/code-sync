@@ -11,7 +11,8 @@
     "lint": "pnpm stylelint && pnpm eslint",
     "lint:fix": "pnpm stylelint --fix && pnpm eslint --fix",
     "start": "cross-env NO_PRETTY_LOGGING=true next start",
-    "stylelint": "stylelint --cache --cache-location ./.stylelintcache --cache-strategy content **/*.css"
+    "stylelint": "stylelint --cache --cache-location ./.stylelintcache --cache-strategy content **/*.css",
+    "test": "vitest run"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "3.5.0",
@@ -39,19 +40,25 @@
     "@code-sync/typescript-config": "workspace:*",
     "@next/bundle-analyzer": "14.1.4",
     "@next/eslint-plugin-next": "14.1.4",
+    "@testing-library/react": "15.0.2",
+    "@testing-library/user-event": "14.5.2",
     "@types/auth0-js": "9.21.5",
     "@types/node": "20.11.30",
     "@types/react": "18.2.73",
     "@types/react-dom": "18.2.23",
+    "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "10.0.1",
     "concurrently": "8.2.2",
     "cross-env": "7.0.3",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.4",
+    "jsdom": "24.0.0",
     "postcss": "8.4.38",
     "stylelint": "16.3.1",
     "tailwindcss": "3.4.3",
     "typed-css-modules": "0.9.1",
-    "typescript": "5.3.2"
+    "typescript": "5.3.2",
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "1.4.0"
   }
 }

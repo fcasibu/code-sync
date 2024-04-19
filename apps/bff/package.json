@@ -39,7 +39,6 @@
     "@0no-co/graphqlsp": "1.7.1",
     "@code-sync/eslint-config": "workspace:*",
     "@code-sync/typescript-config": "workspace:*",
-    "@code-sync/vitest-config": "workspace:*",
     "@faker-js/faker": "8.4.1",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/introspection": "4.0.0",
