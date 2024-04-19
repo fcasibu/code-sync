@@ -5,5 +5,5 @@ import { getI18nMessages, locales } from '@code-sync/translations';
 export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale)) notFound();
 
-  return { messages: getI18nMessages(locale) };
+  return { messages: await getI18nMessages(locale) };
 });

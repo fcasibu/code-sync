@@ -3,9 +3,9 @@ import { vi } from 'vitest';
 import { getI18nMessages } from '@code-sync/translations';
 import { Providers } from '@/app/[locale]/_providers';
 
-vi.mock('next-intl', async (importOriginal) => {
-  const messages = await getI18nMessages('en');
+const messages = await getI18nMessages('en');
 
+vi.mock('next-intl', async (importOriginal) => {
   return {
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
     ...(await importOriginal<typeof import('next-intl')>()),
@@ -19,7 +19,7 @@ export const TestProviders = ({ children }: React.PropsWithChildren) => {
 };
 
 export const testHelper = () => {
-  const setup = () => {};
+  const setup = () => null;
 
   const teardown = () => {
     vi.restoreAllMocks();

@@ -183,9 +183,15 @@ importers:
 
   apps/visualisation:
     dependencies:
+      '@code-sync/translations':
+        specifier: workspace:*
+        version: link:../../packages/translations
       '@code-sync/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@code-sync/web':
+        specifier: workspace:*
+        version: link:../web
       next:
         specifier: 14.2.0
         version: 14.2.0(@babel/core@7.24.4)(react-dom@18.2.0)(react@18.2.0)
