@@ -4,7 +4,7 @@ module.exports = [
     headers: [
       {
         key: 'CDN-Cache-Control',
-        value: 'public, s-maxage=600, stale-while-revalidate=300',
+        value: 'public, max-age=600, stale-while-revalidate=300',
       },
     ],
   },
