@@ -1,4 +1,5 @@
 export * from './src/locale-helper';
+export * from './src/getI18nMessages';
 export * from './src/createMiddleware';
 export * from 'next-intl';
 export * from 'next-intl/server';

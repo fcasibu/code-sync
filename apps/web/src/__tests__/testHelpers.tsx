@@ -1,26 +1,15 @@
 import { cleanup } from '@testing-library/react';
 import { vi } from 'vitest';
+import { getI18nMessages } from '@code-sync/translations';
 import { Providers } from '@/app/[locale]/_providers';
 
 vi.mock('next-intl', async (importOriginal) => {
+  const messages = await getI18nMessages('en');
+
   return {
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
     ...(await importOriginal<typeof import('next-intl')>()),
-    useMessages: () => ({
-      Navigation: {
-        links: {
-          projects: 'Projects',
-          members: 'Members',
-          chat: 'Chat',
-        },
-        userMenu: {
-          toggleUserMenu: 'Toggle user menu',
-          menuLabel: 'My Account',
-          settings: 'Settings',
-          logout: 'Logout',
-        },
-      },
-    }),
+    useMessages: () => messages,
     useTimeZone: () => 'UTC',
   };
 });
