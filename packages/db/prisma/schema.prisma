@@ -19,54 +19,98 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(uuid())
+  id             String       @id @default(uuid())
   authProvider   String
   authId         String
-  email          String    @unique
+  email          String       @unique
   displayName    String?
   profilePicture String?
-  createdAt      DateTime? @default(now())
+  createdAt      DateTime     @default(now())
+  problems       Problem[]    @relation("author")
+  submissions    Submission[]
 
-  rooms      Room[]
-  spectators Spectator[]
+  SessionSpectator SessionSpectator[]
 }
 
-model Room {
-  id             String      @id @default(uuid())
-  name           String
-  description    String?
-  isPrivate      Boolean     @default(false)
-  sessionLimit   DateTime?
-  spectatorLimit Int         @default(20)
-  owner          User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId        String
-  spectators     Spectator[]
-  createdAt      DateTime?   @default(now())
-  document       Document?
+model Problem {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  difficulty  Difficulty
+  author      User         @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  testCases   TestCase[]   @relation("testCases")
+  submissions Submission[] @relation("submissions")
+  sessions    Session[]
 }
 
-// TODO: rename and should be able to handle file structure
-model Document {
-  id        String    @id @default(uuid())
-  content   String
-  language  Language
-  createdAt DateTime? @default(now())
-  room      Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  roomId    String    @unique
-}
-
-model Spectator {
+model TestCase {
   id        String   @id @default(uuid())
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String?
-  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  roomId    String
-  name      String
-  isGuest   Boolean  @default(true)
-  canEdit   Boolean  @default(false)
+  input     String
+  output    String
+  problemId String
+  problem   Problem  @relation("testCases", fields: [problemId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Submission {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problemId String
+  problem   Problem  @relation("submissions", fields: [problemId], references: [id], onDelete: Cascade)
+  code      String
+  language  Language
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id         String             @id @default(uuid())
+  problemId  String
+  problem    Problem            @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  spectators SessionSpectator[]
+  host       String
+  sharedCode String
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+}
+
+model SessionSpectator {
+  id        String   @id @default(uuid())
+  sessionId String
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mode      Mode     @default(SPECTATOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Mode {
+  SPECTATOR
+  COLLABORATOR
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
 }
 
 enum Language {
-  TYPESCRIPT
+  JAVASCRIPT
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  WRONG_ANSWER
+  TIME_LIMIT_EXCEEDED
+  RUNTIME_ERROR
+  COMPILATION_ERROR
 }
