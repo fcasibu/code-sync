@@ -1,10 +1,10 @@
 import * as z from "zod"
-import { CompleteProblem, relatedProblemSchema, CompleteSessionSpectator, relatedSessionSpectatorSchema } from "./index"
+import { CompleteProblem, relatedProblemSchema, CompleteSessionSpectator, relatedSessionSpectatorSchema, CompleteUser, relatedUserSchema } from "./index"
 
 export const sessionSchema = z.object({
   id: z.string(),
   problemId: z.string(),
-  host: z.string(),
+  hostId: z.string(),
   sharedCode: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
@@ -13,6 +13,7 @@ export const sessionSchema = z.object({
 export interface CompleteSession extends z.infer<typeof sessionSchema> {
   problem: CompleteProblem
   spectators: CompleteSessionSpectator[]
+  host: CompleteUser
 }
 
 /**
@@ -23,4 +24,5 @@ export interface CompleteSession extends z.infer<typeof sessionSchema> {
 export const relatedSessionSchema: z.ZodSchema<CompleteSession> = z.lazy(() => sessionSchema.extend({
   problem: relatedProblemSchema,
   spectators: relatedSessionSpectatorSchema.array(),
+  host: relatedUserSchema,
 }))

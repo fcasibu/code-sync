@@ -29,6 +29,7 @@
   "dependencies": {
     "@code-sync/db": "workspace:*",
     "@code-sync/validations": "workspace:*",
-    "pg": "8.11.3"
+    "pg": "8.11.3",
+    "vm2": "3.9.19"
   }
 }

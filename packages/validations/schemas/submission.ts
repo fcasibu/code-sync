@@ -8,7 +8,7 @@ export const submissionSchema = z.object({
   problemId: z.string(),
   code: z.string(),
   language: z.nativeEnum(Language),
-  status: z.nativeEnum(Status),
+  status: z.nativeEnum(Status).nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
 })

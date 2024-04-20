@@ -1,9 +1,9 @@
-import * as z from 'zod';
+import { userSchema } from '../schemas';
 
-export const UserCreateInput = z.object({
-  authProvider: z.string(),
-  authId: z.string(),
-  email: z.string(),
-  displayName: z.string().nullish(),
-  profilePicture: z.string().nullish(),
+export const UserCreateInput = userSchema.pick({
+  authProvider: true,
+  authId: true,
+  email: true,
+  displayName: true,
+  profilePicture: true,
 });

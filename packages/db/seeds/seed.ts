@@ -52,18 +52,21 @@ const problems = problemIds.map((id, index): Problem => {
   };
 });
 
-const testCases = testCaseIds.map((id, index): TestCase => {
-  faker.seed(index);
+const testCases = testCaseIds.map(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (id, index): TestCase & { input: any; output: any } => {
+    faker.seed(index);
 
-  return {
-    id,
-    input: '',
-    output: '',
-    problemId: faker.helpers.arrayElement(problemIds),
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.recent(),
-  };
-});
+    return {
+      id,
+      input: '',
+      output: '',
+      problemId: faker.helpers.arrayElement(problemIds),
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.recent(),
+    };
+  },
+);
 
 const submissions = submissionIds.map((id, index): Submission => {
   faker.seed(index);
@@ -86,7 +89,7 @@ const sessions = sessionIds.map((id, index): Session => {
   return {
     id,
     problemId: faker.helpers.arrayElement(problemIds),
-    host: faker.helpers.arrayElement(userIds),
+    hostId: faker.helpers.arrayElement(userIds),
     sharedCode: '',
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),

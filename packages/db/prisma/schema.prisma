@@ -19,17 +19,17 @@ datasource db {
 }
 
 model User {
-  id             String       @id @default(uuid())
-  authProvider   String
-  authId         String
-  email          String       @unique
-  displayName    String?
-  profilePicture String?
-  createdAt      DateTime     @default(now())
-  problems       Problem[]    @relation("author")
-  submissions    Submission[]
-
-  SessionSpectator SessionSpectator[]
+  id                String             @id @default(uuid())
+  authProvider      String
+  authId            String
+  email             String             @unique
+  displayName       String?
+  profilePicture    String?
+  createdAt         DateTime           @default(now())
+  problems          Problem[]          @relation("author")
+  submissions       Submission[]
+  sessionSpectators SessionSpectator[]
+  session           Session[]
 }
 
 model Problem {
@@ -64,7 +64,7 @@ model Submission {
   problem   Problem  @relation("submissions", fields: [problemId], references: [id], onDelete: Cascade)
   code      String
   language  Language
-  status    Status   @default(PENDING)
+  status    Status?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -74,7 +74,8 @@ model Session {
   problemId  String
   problem    Problem            @relation(fields: [problemId], references: [id], onDelete: Cascade)
   spectators SessionSpectator[]
-  host       String
+  hostId     String
+  host       User               @relation(fields: [hostId], references: [id])
   sharedCode String
   createdAt  DateTime           @default(now())
   updatedAt  DateTime           @updatedAt
@@ -107,7 +108,6 @@ enum Language {
 }
 
 enum Status {
-  PENDING
   ACCEPTED
   WRONG_ANSWER
   TIME_LIMIT_EXCEEDED

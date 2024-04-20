@@ -8,7 +8,7 @@ CREATE TYPE "Difficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
 CREATE TYPE "Language" AS ENUM ('JAVASCRIPT');
 
 -- CreateEnum
-CREATE TYPE "Status" AS ENUM ('PENDING', 'ACCEPTED', 'WRONG_ANSWER', 'TIME_LIMIT_EXCEEDED', 'RUNTIME_ERROR', 'COMPILATION_ERROR');
+CREATE TYPE "Status" AS ENUM ('ACCEPTED', 'WRONG_ANSWER', 'TIME_LIMIT_EXCEEDED', 'RUNTIME_ERROR', 'COMPILATION_ERROR');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -55,7 +55,7 @@ CREATE TABLE "Submission" (
     "problemId" TEXT NOT NULL,
     "code" TEXT NOT NULL,
     "language" "Language" NOT NULL,
-    "status" "Status" NOT NULL DEFAULT 'PENDING',
+    "status" "Status",
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -66,7 +66,7 @@ CREATE TABLE "Submission" (
 CREATE TABLE "Session" (
     "id" TEXT NOT NULL,
     "problemId" TEXT NOT NULL,
-    "host" TEXT NOT NULL,
+    "hostId" TEXT NOT NULL,
     "sharedCode" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -103,6 +103,9 @@ ALTER TABLE "Submission" ADD CONSTRAINT "Submission_problemId_fkey" FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_problemId_fkey" FOREIGN KEY ("problemId") REFERENCES "Problem"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Session" ADD CONSTRAINT "Session_hostId_fkey" FOREIGN KEY ("hostId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SessionSpectator" ADD CONSTRAINT "SessionSpectator_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "Session"("id") ON DELETE CASCADE ON UPDATE CASCADE;
