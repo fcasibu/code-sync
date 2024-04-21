@@ -40,7 +40,7 @@ const introspection = {
             "name": "user",
             "type": {
               "kind": "OBJECT",
-              "name": "User",
+              "name": "CompleteUser",
               "ofType": null
             },
             "args": [
@@ -61,7 +61,7 @@ const introspection = {
             "name": "userByProviderAndProviderId",
             "type": {
               "kind": "OBJECT",
-              "name": "User",
+              "name": "CompleteUser",
               "ofType": null
             },
             "args": [
@@ -95,7 +95,7 @@ const introspection = {
               "kind": "LIST",
               "ofType": {
                 "kind": "OBJECT",
-                "name": "CodingProblem",
+                "name": "CompleteCodingProblem",
                 "ofType": null
               }
             },
@@ -105,7 +105,7 @@ const introspection = {
             "name": "codingProblem",
             "type": {
               "kind": "OBJECT",
-              "name": "CodingProblem",
+              "name": "CompleteCodingProblem",
               "ofType": null
             },
             "args": [
@@ -305,7 +305,7 @@ const introspection = {
             "name": "createCodingProblem",
             "type": {
               "kind": "OBJECT",
-              "name": "CodingProblem",
+              "name": "CompleteCodingProblem",
               "ofType": null
             },
             "args": [
@@ -326,7 +326,7 @@ const introspection = {
             "name": "updateCodingProblem",
             "type": {
               "kind": "OBJECT",
-              "name": "CodingProblem",
+              "name": "CompleteCodingProblem",
               "ofType": null
             },
             "args": [
@@ -420,6 +420,139 @@ const introspection = {
       },
       {
         "kind": "OBJECT",
+        "name": "CompleteUser",
+        "fields": [
+          {
+            "name": "authId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "authProvider",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "displayName",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "email",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "profilePicture",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "problems",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CodingProblem",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "submissions",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Submission",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "sessionSpectators",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "SessionSpectator",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "session",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CodingProblemSession",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "User",
         "fields": [
           {
@@ -485,6 +618,18 @@ const introspection = {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "createdAt",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Date",
+                "ofType": null
+              }
             },
             "args": []
           }
@@ -624,24 +769,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           }
@@ -703,24 +842,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           }
@@ -769,8 +902,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Language",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             }
@@ -834,8 +967,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Language",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -844,8 +977,8 @@ const introspection = {
           {
             "name": "status",
             "type": {
-              "kind": "ENUM",
-              "name": "Status",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "args": []
@@ -853,24 +986,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           }
@@ -934,8 +1061,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Language",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -944,8 +1071,8 @@ const introspection = {
           {
             "name": "status",
             "type": {
-              "kind": "ENUM",
-              "name": "Status",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "args": []
@@ -953,59 +1080,23 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           }
         ],
         "interfaces": []
-      },
-      {
-        "kind": "ENUM",
-        "name": "Language",
-        "enumValues": [
-          {
-            "name": "JAVASCRIPT"
-          }
-        ]
-      },
-      {
-        "kind": "ENUM",
-        "name": "Status",
-        "enumValues": [
-          {
-            "name": "ACCEPTED"
-          },
-          {
-            "name": "WRONG_ANSWER"
-          },
-          {
-            "name": "TIME_LIMIT_EXCEEDED"
-          },
-          {
-            "name": "RUNTIME_ERROR"
-          },
-          {
-            "name": "COMPILATION_ERROR"
-          }
-        ]
       },
       {
         "kind": "INPUT_OBJECT",
@@ -1055,8 +1146,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Mode",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             }
@@ -1106,24 +1197,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
@@ -1132,8 +1217,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Mode",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -1185,24 +1270,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
@@ -1211,8 +1290,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Mode",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -1220,18 +1299,6 @@ const introspection = {
           }
         ],
         "interfaces": []
-      },
-      {
-        "kind": "ENUM",
-        "name": "Mode",
-        "enumValues": [
-          {
-            "name": "SPECTATOR"
-          },
-          {
-            "name": "COLLABORATOR"
-          }
-        ]
       },
       {
         "kind": "SCALAR",
@@ -1328,12 +1395,9 @@ const introspection = {
               "ofType": {
                 "kind": "LIST",
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "SessionSpectator",
-                    "ofType": null
-                  }
+                  "kind": "OBJECT",
+                  "name": "SessionSpectator",
+                  "ofType": null
                 }
               }
             },
@@ -1354,24 +1418,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
@@ -1433,24 +1491,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
@@ -1528,8 +1580,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Difficulty",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             }
@@ -1542,17 +1594,6 @@ const introspection = {
         "inputFields": [
           {
             "name": "problemId",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            }
-          },
-          {
-            "name": "authorId",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -1589,8 +1630,8 @@ const introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "ENUM",
-                "name": "Difficulty",
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             }
@@ -1599,7 +1640,7 @@ const introspection = {
       },
       {
         "kind": "OBJECT",
-        "name": "CodingProblem",
+        "name": "CompleteCodingProblem",
         "fields": [
           {
             "name": "id",
@@ -1664,24 +1705,18 @@ const introspection = {
           {
             "name": "createdAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "updatedAt",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Date",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "args": []
           },
@@ -1692,12 +1727,9 @@ const introspection = {
               "ofType": {
                 "kind": "LIST",
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "TestCase",
-                    "ofType": null
-                  }
+                  "kind": "OBJECT",
+                  "name": "TestCase",
+                  "ofType": null
                 }
               }
             },
@@ -1710,12 +1742,9 @@ const introspection = {
               "ofType": {
                 "kind": "LIST",
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Submission",
-                    "ofType": null
-                  }
+                  "kind": "OBJECT",
+                  "name": "Submission",
+                  "ofType": null
                 }
               }
             },
@@ -1728,12 +1757,9 @@ const introspection = {
               "ofType": {
                 "kind": "LIST",
                 "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "CodingProblemSession",
-                    "ofType": null
-                  }
+                  "kind": "OBJECT",
+                  "name": "CodingProblemSession",
+                  "ofType": null
                 }
               }
             },
@@ -1743,19 +1769,89 @@ const introspection = {
         "interfaces": []
       },
       {
-        "kind": "ENUM",
-        "name": "Difficulty",
-        "enumValues": [
+        "kind": "OBJECT",
+        "name": "CodingProblem",
+        "fields": [
           {
-            "name": "EASY"
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
           },
           {
-            "name": "MEDIUM"
+            "name": "title",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
           },
           {
-            "name": "HARD"
+            "name": "description",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "difficulty",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "authorId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "createdAt",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "updatedAt",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
+            },
+            "args": []
           }
-        ]
+        ],
+        "interfaces": []
       },
       {
         "kind": "SCALAR",

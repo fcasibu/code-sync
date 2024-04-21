@@ -5,7 +5,8 @@
   },
   "Navigation": {
     "links": {
-      "explore": "Explore"
+      "explore": "Explore",
+      "problems": "Problems"
     },
     "userMenu": {
       "toggleUserMenu": "Toggle user menu",
@@ -22,8 +23,12 @@
       },
       "Submissions": {
         "status": "Status",
-        "language": "Language"
+        "language": "Language",
+        "noSubmissions": "No submissions yet."
       }
     }
+  },
+  "CodeEditor": {
+    "title": "Code"
   }
 }

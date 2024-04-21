@@ -15,8 +15,7 @@
 }
 
 .logo {
-  @apply pointer-events-none
-    flex
+  @apply flex
     flex-shrink-0 
     items-center
     gap-1;

@@ -2,10 +2,10 @@
 
 import clsx from 'clsx';
 import type { LucideIcon } from 'lucide-react';
-import { Box, MessageCircle, User, Users } from 'lucide-react';
+import { Box, List, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { LocalizedLink, useLocalizedPathname } from '@code-sync/translations';
 import {
   Button,
   DropdownMenu,
@@ -35,7 +35,7 @@ const NavigationLink = ({
 }: Readonly<NavigationLinkProps>) => (
   <li>
     <Button variant="link" asChild>
-      <Link
+      <LocalizedLink
         className={clsx(styles.link, isHighlighted && styles.linkHighlight)}
         href={href}
       >
@@ -43,19 +43,18 @@ const NavigationLink = ({
         <Text className={styles.text} as="span">
           {title}
         </Text>
-      </Link>
+      </LocalizedLink>
     </Button>
   </li>
 );
 
 export const Navigation = () => {
   const t = useTranslations('Navigation');
-  const pathname = usePathname();
+  const pathname = useLocalizedPathname();
 
   const links = [
-    { title: t('links.projects'), icon: Box, href: '/' },
-    { title: t('links.members'), icon: Users, href: '/members' },
-    { title: t('links.chat'), icon: MessageCircle, href: '/chat' },
+    { title: t('links.explore'), icon: Box, href: `/explore` },
+    { title: t('links.problems'), icon: List, href: `/problems` },
   ];
 
   return (

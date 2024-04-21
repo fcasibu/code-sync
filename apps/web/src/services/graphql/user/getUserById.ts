@@ -12,10 +12,6 @@ const userQuery = graphql(`
       displayName
       email
       profilePicture
-      rooms {
-        id
-        name
-      }
     }
   }
 `);

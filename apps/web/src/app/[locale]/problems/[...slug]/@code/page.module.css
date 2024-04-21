@@ -1,0 +1,21 @@
+.container {
+  @apply bg-zinc-950 
+    p-3;
+}
+
+.title {
+  @apply mb-3 
+    flex 
+    items-center 
+    gap-2;
+
+  > span {
+    @apply text-xs;
+  }
+}
+
+.codeEditor {
+  --editor-height: 400px;
+
+  @apply min-h-[var(--editor-height)];
+}

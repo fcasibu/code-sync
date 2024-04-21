@@ -1,0 +1,32 @@
+.noSubmissions {
+  @apply flex 
+    h-full 
+    items-center 
+    justify-center;
+}
+
+.submissions {
+  @apply w-full 
+    table-fixed 
+    border-collapse
+    text-left;
+
+  th,
+  td {
+    @apply p-3;
+  }
+
+  th {
+    @apply bg-zinc-950;
+  }
+}
+
+.success {
+  @apply font-bold
+    text-green-500;
+}
+
+.error {
+  @apply font-bold
+    text-red-500;
+}

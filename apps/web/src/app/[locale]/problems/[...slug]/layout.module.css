@@ -1,0 +1,8 @@
+.problemLayout {
+  @apply flex 
+    p-2;
+
+  > * {
+    @apply flex-1;
+  }
+}

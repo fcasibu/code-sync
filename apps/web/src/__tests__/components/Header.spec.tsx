@@ -31,8 +31,12 @@ describe('components#Header', () => {
 
       expect(screen.getByRole('navigation')).toBeDefined();
       expect(screen.getByRole('list')).toBeDefined();
+      expect(screen.getByRole('list').children).toHaveLength(2);
       expect(screen.getByRole('list').children[0].textContent).toMatch(
         /explore/i,
+      );
+      expect(screen.getByRole('list').children[1].textContent).toMatch(
+        /problems/i,
       );
       expect(screen.getByText(/toggle user menu/i)).toBeDefined();
     });
