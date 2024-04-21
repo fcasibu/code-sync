@@ -1,6 +1,7 @@
 {
   "extends": "@code-sync/typescript-config/base.json",
   "compilerOptions": {
+    "declaration": true,
     "types": [
       "./global.d.ts"
     ]

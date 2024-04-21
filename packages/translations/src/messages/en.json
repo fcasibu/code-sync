@@ -5,15 +5,25 @@
   },
   "Navigation": {
     "links": {
-      "projects": "Projects",
-      "members": "Members",
-      "chat": "Chat"
+      "explore": "Explore"
     },
     "userMenu": {
       "toggleUserMenu": "Toggle user menu",
       "menuLabel": "My Account",
       "settings": "Settings",
       "logout": "Logout"
+    }
+  },
+  "ProblemDetail": {
+    "Explorer": {
+      "tabs": {
+        "description": "Description",
+        "submissions:": "Submissions"
+      },
+      "Submissions": {
+        "status": "Status",
+        "language": "Language"
+      }
     }
   }
 }
