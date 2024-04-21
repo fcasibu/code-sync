@@ -1,5 +1,7 @@
 import { forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import clsx from 'clsx';
 import styles from './Typography.module.css';
 
@@ -57,15 +59,28 @@ export const TypographyH6 = forwardRef<
 
 TypographyH6.displayName = 'TypographyH6';
 
-type TextProps = React.ComponentProps<'p'> & {
+const text = cva(styles.text, {
+  variants: {
+    size: {
+      xs: styles.xs,
+      sm: styles.sm,
+      lg: styles.lg,
+      xl: styles.xl,
+    },
+  },
+});
+
+interface TextProps
+  extends React.ComponentProps<'p'>,
+    VariantProps<typeof text> {
   as?: 'p' | 'span' | 'label';
   asChild?: boolean;
-};
+}
 
 export const Text = forwardRef<React.ElementRef<'p'>, Readonly<TextProps>>(
-  ({ className, as: Tag = 'p', children, ...props }, ref) => {
+  ({ className, as: Tag = 'p', children, size, ...props }, ref) => {
     return (
-      <Slot {...props} ref={ref} className={clsx(styles.text, className)}>
+      <Slot {...props} ref={ref} className={text({ size, className })}>
         <Tag>{children}</Tag>
       </Slot>
     );

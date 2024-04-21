@@ -59,3 +59,19 @@
     leading-relaxed 
     last:m-0;
 }
+
+.xs {
+  @apply text-xs;
+}
+
+.sm {
+  @apply text-sm;
+}
+
+.lg {
+  @apply text-lg;
+}
+
+.xl {
+  @apply text-xl;
+}
