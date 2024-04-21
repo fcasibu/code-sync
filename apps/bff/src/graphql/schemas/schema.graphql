@@ -1,20 +1,21 @@
 type Query {
-  user(input: UserByIdInput!): User
-  userByProviderAndProviderId(provider: String!, providerId: String!): User
-  test: HelloWorld!
-  room(input: RoomByIdInput!): Room
+  user(input: UserByIdInput!): CompleteUser
+  userByProviderAndProviderId(provider: String!, providerId: String!): CompleteUser
+  codingProblems: [CompleteCodingProblem]
+  codingProblem(input: CodingProblemByIdInput!): CompleteCodingProblem
 }
 
 type Mutation {
   createUser(input: CreateUserInput!): User
-  joinRoom(input: JoinRoomInput!): Spectator
-  switchSpectatorToCollaborator(input: SpectatorIdInput!): Spectator
-  switchCollaboratorToSpectator(input: SpectatorIdInput!): Spectator
-  createRoom(input: CreateRoomInput!): Room
-  createPrivateRoom(input: CreateRoomInput!): Room
-  deleteRoom(roomId: String!): Boolean!
-  createDocument(input: CreateDocumentInput!): Document
-  saveDocument(input: SaveDocumentInput!): Document
+  createTestCase(input: CreateTestCaseInput!): CompleteTestCase
+  updateTestCase(input: UpdateTestCaseInput!): CompleteTestCase
+  createSubmission(input: CreateSubmissionInput!): CompleteSubmission
+  createSpectator(input: CreateSessionSpectatorInput!): CompleteSessionSpectator
+  updateSpectator(input: UpdateSessionSpectatorInput!): CompleteSessionSpectator
+  createSession(input: CreateCodingProblemSessionInput!): CompleteCodingProblemSession
+  updateSession(input: UpdateCodingProblemSessionInput!): CompleteCodingProblemSession
+  createCodingProblem(input: CreateCodingProblemInput!): CompleteCodingProblem
+  updateCodingProblem(input: UpdateCodingProblemInput!): CompleteCodingProblem
 }
 
 input UserByIdInput {
@@ -29,6 +30,19 @@ input CreateUserInput {
   profilePicture: String
 }
 
+type CompleteUser {
+  authId: String!
+  authProvider: String!
+  displayName: String
+  email: String!
+  id: String!
+  profilePicture: String
+  problems: [CodingProblem]!
+  submissions: [Submission]!
+  sessionSpectators: [SessionSpectator]!
+  session: [CodingProblemSession]!
+}
+
 type User {
   authId: String!
   authProvider: String!
@@ -36,72 +50,166 @@ type User {
   email: String!
   id: String!
   profilePicture: String
-  rooms: [Room!]
-  spectators: [Spectator!]
-}
-
-type HelloWorld {
-  helloWorld: String
-}
-
-input JoinRoomInput {
-  userId: String
-  roomId: String!
-  name: String!
-}
-
-input SpectatorIdInput {
-  spectatorId: String!
-}
-
-type Spectator {
-  canEdit: Boolean!
   createdAt: DateTime!
+}
+
+input CreateTestCaseInput {
+  input: String!
+  output: String!
+  problemId: String!
+}
+
+input UpdateTestCaseInput {
+  testCaseId: String!
+  input: String!
+  output: String!
+}
+
+type CompleteTestCase {
   id: String!
-  isGuest: Boolean!
-  name: String!
+  problem: CodingProblem!
+  input: String!
+  output: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type TestCase {
+  id: String!
+  problemId: String!
+  input: String!
+  output: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CreateSubmissionInput {
+  userId: String!
+  problemId: String!
+  code: String!
+  language: String!
+}
+
+type CompleteSubmission {
+  id: String!
+  problem: CodingProblem!
+  user: User!
+  code: String!
+  language: String!
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Submission {
+  id: String!
+  problemId: String!
+  userId: String!
+  code: String!
+  language: String!
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CreateSessionSpectatorInput {
+  userId: String!
+  sessionId: String!
+}
+
+input UpdateSessionSpectatorInput {
+  spectatorId: String!
+  mode: String!
+}
+
+type CompleteSessionSpectator {
+  id: String!
+  session: CodingProblemSession!
+  user: User!
+  createdAt: DateTime
+  updatedAt: DateTime
+  mode: String!
+}
+
+type SessionSpectator {
+  id: String!
+  sessionId: String!
+  userId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  mode: String!
 }
 
 scalar DateTime
 
-input RoomByIdInput {
+input CreateCodingProblemSessionInput {
+  problemId: String!
+  hostId: String!
+}
+
+input UpdateCodingProblemSessionInput {
+  sessionId: String!
+  sharedCode: String!
+}
+
+type CompleteCodingProblemSession {
   id: String!
-}
-
-input CreateRoomInput {
-  description: String
-  name: String!
-  ownerId: String!
-}
-
-type Room {
+  problem: CodingProblem!
+  spectators: [SessionSpectator]!
+  host: User!
   createdAt: DateTime
-  description: String
-  document: Document
+  updatedAt: DateTime
+  sharedCode: String!
+}
+
+type CodingProblemSession {
   id: String!
-  isPrivate: Boolean!
-  name: String!
-  owner: User!
-  sessionLimit: DateTime
-  spectatorLimit: Int!
-  spectators: [Spectator!]!
-}
-
-input CreateDocumentInput {
-  language: String!
-  roomId: String!
-}
-
-input SaveDocumentInput {
-  documentId: String!
-  content: String!
-}
-
-type Document {
-  id: String!
-  content: String!
-  language: String!
+  problemId: String!
+  hostId: String!
   createdAt: DateTime
+  updatedAt: DateTime
+  sharedCode: String!
+}
+
+input CodingProblemByIdInput {
+  id: String!
+}
+
+input CreateCodingProblemInput {
+  authorId: String!
+  title: String!
+  description: String!
+  difficulty: String!
+}
+
+input UpdateCodingProblemInput {
+  problemId: String!
+  title: String!
+  description: String!
+  difficulty: String!
+}
+
+type CompleteCodingProblem {
+  id: String!
+  title: String!
+  description: String!
+  difficulty: String!
+  author: User!
+  createdAt: DateTime
+  updatedAt: DateTime
+  testCases: [TestCase]!
+  submissions: [Submission]!
+  sessions: [CodingProblemSession]!
+}
+
+type CodingProblem {
+  id: String!
+  title: String!
+  description: String!
+  difficulty: String!
+  authorId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
 schema {

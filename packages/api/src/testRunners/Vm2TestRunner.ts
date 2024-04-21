@@ -6,7 +6,7 @@ import { Status, type TestCase } from '@code-sync/db';
 import type { TestRunner } from './types';
 
 export class Vm2TestRunner implements TestRunner {
-  private readonly vm = new VM({
+  private vm = new VM({
     sandbox: {},
     compiler: 'javascript',
     timeout: 20000,
@@ -17,12 +17,8 @@ export class Vm2TestRunner implements TestRunner {
 
     for (const testCase of testCases) {
       const testCode = `
-        const output = (function() {
-          ${code}
-          return solution(${coerceToType(testCase.input)});
-        })();
-
-        Promise.resolve(output);`;
+        ${code}
+        Promise.resolve(solution(${coerceToType(testCase.input)}));`;
 
       try {
         const output = await this.vm.run(testCode);
@@ -35,6 +31,12 @@ export class Vm2TestRunner implements TestRunner {
         }
       } catch (error) {
         return getStatus((error as Error).toString());
+      } finally {
+        this.vm = new VM({
+          sandbox: {},
+          compiler: 'javascript',
+          timeout: 20000,
+        });
       }
     }
 

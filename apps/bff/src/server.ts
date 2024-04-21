@@ -1,6 +1,7 @@
 import type { Server } from 'node:http';
 import { ApolloServer } from '@apollo/server';
 import { addResolversToSchema } from '@graphql-tools/schema';
+import compression from 'compression';
 import 'dotenv/config';
 import express from 'express';
 import type { PrismaClient } from '@code-sync/db';
@@ -49,6 +50,7 @@ export const startServer = async ({
     app.use(corsMiddleware(whiteListedDomains));
     app.use(express.json());
     app.use(authMiddleware);
+    app.use(compression());
 
     app.get('/health', checkHealthMiddleware(prismaClient));
     app.use('/', graphQLExpressMiddleware(apolloServer, prismaClient));

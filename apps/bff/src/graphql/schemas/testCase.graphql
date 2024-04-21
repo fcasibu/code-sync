@@ -1,0 +1,34 @@
+type Mutation {
+  createTestCase(input: CreateTestCaseInput!): CompleteTestCase
+  updateTestCase(input: UpdateTestCaseInput!): CompleteTestCase
+}
+
+input CreateTestCaseInput {
+  input: String!
+  output: String!
+  problemId: String!
+}
+
+input UpdateTestCaseInput {
+  testCaseId: String!
+  input: String!
+  output: String!
+}
+
+type CompleteTestCase {
+  id: String!
+  problem: CodingProblem!
+  input: String!
+  output: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type TestCase {
+  id: String!
+  problemId: String!
+  input: String!
+  output: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}

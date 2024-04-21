@@ -1,0 +1,51 @@
+type Query {
+  codingProblems: [CompleteCodingProblem]
+  codingProblem(input: CodingProblemByIdInput!): CompleteCodingProblem
+}
+
+type Mutation {
+  createCodingProblem(input: CreateCodingProblemInput!): CompleteCodingProblem
+  updateCodingProblem(input: UpdateCodingProblemInput!): CompleteCodingProblem
+}
+
+input CodingProblemByIdInput {
+  id: String!
+}
+
+input CreateCodingProblemInput {
+  authorId: String!
+  title: String!
+  description: String!
+  difficulty: String!
+}
+
+# TODO: make fields optional
+input UpdateCodingProblemInput {
+  problemId: String!
+  title: String!
+  description: String!
+  difficulty: String!
+}
+
+type CompleteCodingProblem {
+  id: String!
+  title: String!
+  description: String!
+  difficulty: String!
+  author: User!
+  createdAt: DateTime
+  updatedAt: DateTime
+  testCases: [TestCase]!
+  submissions: [Submission]!
+  sessions: [CodingProblemSession]!
+}
+
+type CodingProblem {
+  id: String!
+  title: String!
+  description: String!
+  difficulty: String!
+  authorId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}

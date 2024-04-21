@@ -9,6 +9,12 @@ export class UserAPI {
       where: {
         id,
       },
+      include: {
+        session: true,
+        problems: true,
+        submissions: true,
+        sessionSpectators: true,
+      },
     });
   }
 
@@ -21,12 +27,24 @@ export class UserAPI {
         authProvider: provider,
         authId: providerId,
       },
+      include: {
+        session: true,
+        problems: true,
+        submissions: true,
+        sessionSpectators: true,
+      },
     });
   }
 
   public async createUser(data: z.infer<typeof UserCreateInput>) {
     return this.prisma.user.create({
       data,
+      include: {
+        session: true,
+        problems: true,
+        submissions: true,
+        sessionSpectators: true,
+      },
     });
   }
 }

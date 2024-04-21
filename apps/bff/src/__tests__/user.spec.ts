@@ -22,20 +22,14 @@ describe('resolver#User', () => {
             authId
             authProvider
             profilePicture
-            rooms {
+            session {
               id
-              name
-              owner {
-                id
-                rooms {
-                  __typename
-                }
-                authProvider
-                authId
-                email
-                displayName
-                profilePicture
-              }
+            }
+            problems {
+              id
+            }
+            submissions {
+              id
             }
           }
         }
@@ -50,8 +44,14 @@ describe('resolver#User', () => {
         .variables({ input: { id: userId } })
         .expectNoErrors();
 
+      expect(response.data?.user).toBeDefined();
       expect(response.data?.user?.id).toBe(userId);
-      expect(response.data).toMatchSnapshot();
+      expect(response.data?.user?.authId).toBeDefined();
+      expect(response.data?.user?.authProvider).toBeDefined();
+      expect(response.data?.user?.email).toBeDefined();
+      expect(response.data?.user?.problems).toBeDefined();
+      expect(response.data?.user?.submissions).toBeDefined();
+      expect(response.data?.user?.session).toBeDefined();
     });
   });
 
@@ -80,21 +80,6 @@ describe('resolver#User', () => {
             authId
             authProvider
             profilePicture
-            rooms {
-              id
-              name
-              owner {
-                id
-                rooms {
-                  __typename
-                }
-                authProvider
-                authId
-                email
-                displayName
-                profilePicture
-              }
-            }
           }
         }
       `);
@@ -107,14 +92,13 @@ describe('resolver#User', () => {
         .variables({ providerId: authId, provider: authProvider })
         .expectNoErrors();
 
-      expect(response.data?.userByProviderAndProviderId?.authId).toBe(authId);
-      expect(response.data?.userByProviderAndProviderId?.authProvider).toBe(
-        authProvider,
-      );
-      expect(response.data?.userByProviderAndProviderId?.email).toBe(
-        user.email,
-      );
-      expect(response.data?.userByProviderAndProviderId?.id).toBe(user.id);
+      expect(response.data?.userByProviderAndProviderId).toMatchObject({
+        authProvider: authProvider,
+        authId: authId,
+        email: user.email,
+        displayName: user.displayName,
+        profilePicture: user.profilePicture,
+      });
     });
   });
 
@@ -129,21 +113,6 @@ describe('resolver#User', () => {
             authId
             authProvider
             profilePicture
-            rooms {
-              id
-              name
-              owner {
-                id
-                rooms {
-                  __typename
-                }
-                authProvider
-                authId
-                email
-                displayName
-                profilePicture
-              }
-            }
           }
         }
       `);

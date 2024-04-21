@@ -78,6 +78,7 @@ describe('CodingProblemSession#API', () => {
           sharedCode: '',
         },
         include: {
+          problem: true,
           spectators: true,
           host: true,
         },
@@ -149,6 +150,7 @@ describe('CodingProblemSession#API', () => {
           sharedCode: 'console.log("Hello, World!")',
         },
         include: {
+          problem: true,
           spectators: true,
           host: true,
         },

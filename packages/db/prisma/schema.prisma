@@ -48,7 +48,9 @@ model Problem {
 
 model TestCase {
   id        String   @id @default(uuid())
+  // TODO: string is not it
   input     String
+  // TODO: string is not it
   output    String
   problemId String
   problem   Problem  @relation("testCases", fields: [problemId], references: [id], onDelete: Cascade)

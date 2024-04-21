@@ -1,7 +1,0 @@
-type Query {
-  test: HelloWorld!
-}
-
-type HelloWorld {
-  helloWorld: String
-}

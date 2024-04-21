@@ -1,14 +1,18 @@
 import type {
-  DocumentAPI,
-  RoomAPI,
-  SpectatorAPI,
+  CodingProblemAPI,
+  CodingProblemSessionAPI,
+  SessionSpectatorAPI,
+  SubmissionAPI,
+  TestCaseAPI,
   UserAPI,
 } from '@code-sync/api';
 
 export interface Context {
   userApi: UserAPI;
-  roomApi: RoomAPI;
-  documentApi: DocumentAPI;
-  spectatorApi: SpectatorAPI;
+  codingProblemApi: CodingProblemAPI;
+  submissionApi: SubmissionAPI;
+  codingProblemSessionApi: CodingProblemSessionAPI;
+  sessionSpectatorApi: SessionSpectatorAPI;
+  testCaseApi: TestCaseAPI;
   isAuthorized: boolean;
 }

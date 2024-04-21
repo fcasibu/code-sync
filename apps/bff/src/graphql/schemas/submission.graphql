@@ -1,0 +1,32 @@
+type Mutation {
+  createSubmission(input: CreateSubmissionInput!): CompleteSubmission
+}
+
+input CreateSubmissionInput {
+  userId: String!
+  problemId: String!
+  code: String!
+  language: String!
+}
+
+type CompleteSubmission {
+  id: String!
+  problem: CodingProblem!
+  user: User!
+  code: String!
+  language: String!
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type Submission {
+  id: String!
+  problemId: String!
+  userId: String!
+  code: String!
+  language: String!
+  status: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}

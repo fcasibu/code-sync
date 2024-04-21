@@ -1,6 +1,9 @@
 type Query {
-  user(input: UserByIdInput!): User
-  userByProviderAndProviderId(provider: String!, providerId: String!): User
+  user(input: UserByIdInput!): CompleteUser
+  userByProviderAndProviderId(
+    provider: String!
+    providerId: String!
+  ): CompleteUser
 }
 type Mutation {
   createUser(input: CreateUserInput!): User
@@ -18,6 +21,19 @@ input CreateUserInput {
   profilePicture: String
 }
 
+type CompleteUser {
+  authId: String!
+  authProvider: String!
+  displayName: String
+  email: String!
+  id: String!
+  profilePicture: String
+  problems: [CodingProblem]!
+  submissions: [Submission]!
+  sessionSpectators: [SessionSpectator]!
+  session: [CodingProblemSession]!
+}
+
 type User {
   authId: String!
   authProvider: String!
@@ -25,6 +41,5 @@ type User {
   email: String!
   id: String!
   profilePicture: String
-  rooms: [Room!]
-  spectators: [Spectator!]
+  createdAt: DateTime!
 }

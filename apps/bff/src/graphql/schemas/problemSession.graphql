@@ -1,0 +1,37 @@
+type Mutation {
+  createSession(
+    input: CreateCodingProblemSessionInput!
+  ): CompleteCodingProblemSession
+  updateSession(
+    input: UpdateCodingProblemSessionInput!
+  ): CompleteCodingProblemSession
+}
+
+input CreateCodingProblemSessionInput {
+  problemId: String!
+  hostId: String!
+}
+
+input UpdateCodingProblemSessionInput {
+  sessionId: String!
+  sharedCode: String!
+}
+
+type CompleteCodingProblemSession {
+  id: String!
+  problem: CodingProblem!
+  spectators: [SessionSpectator]!
+  host: User!
+  createdAt: DateTime
+  updatedAt: DateTime
+  sharedCode: String!
+}
+
+type CodingProblemSession {
+  id: String!
+  problemId: String!
+  hostId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  sharedCode: String!
+}

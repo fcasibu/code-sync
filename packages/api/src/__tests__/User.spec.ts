@@ -36,6 +36,12 @@ describe('User#API', () => {
 
       expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
         where: { id },
+        include: {
+          session: true,
+          problems: true,
+          submissions: true,
+          sessionSpectators: true,
+        },
       });
       expect(result).toStrictEqual(mockUser);
     });
@@ -49,6 +55,12 @@ describe('User#API', () => {
 
       expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
         where: { id: '' },
+        include: {
+          session: true,
+          problems: true,
+          submissions: true,
+          sessionSpectators: true,
+        },
       });
       expect(result).toBeNull();
     });
@@ -85,6 +97,12 @@ describe('User#API', () => {
 
       expect(mockPrisma.user.findFirst).toHaveBeenCalledWith({
         where: { authProvider, authId },
+        include: {
+          session: true,
+          problems: true,
+          submissions: true,
+          sessionSpectators: true,
+        },
       });
       expect(result).toStrictEqual(mockUser);
     });
@@ -98,6 +116,12 @@ describe('User#API', () => {
 
       expect(mockPrisma.user.findUnique).toHaveBeenCalledWith({
         where: { id: '' },
+        include: {
+          session: true,
+          problems: true,
+          submissions: true,
+          sessionSpectators: true,
+        },
       });
       expect(result).toBeNull();
     });
@@ -129,6 +153,12 @@ describe('User#API', () => {
 
       expect(mockPrisma.user.create).toHaveBeenCalledWith({
         data: mockUser,
+        include: {
+          session: true,
+          problems: true,
+          submissions: true,
+          sessionSpectators: true,
+        },
       });
       expect(result).toStrictEqual(mockUser);
     });

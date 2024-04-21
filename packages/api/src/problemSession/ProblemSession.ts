@@ -11,6 +11,7 @@ export class CodingProblemSessionAPI {
         sharedCode: '',
       },
       include: {
+        problem: true,
         spectators: true,
         host: true,
       },
@@ -22,6 +23,7 @@ export class CodingProblemSessionAPI {
       where: { id: sessionId },
       data: { sharedCode: code },
       include: {
+        problem: true,
         spectators: true,
         host: true,
       },

@@ -16,7 +16,7 @@ const problemIds = Array.from({ length: 50 }, (_, i) => `problem-${i}`);
 const testCaseIds = Array.from({ length: 100 }, (_, i) => `testCase-${i}`);
 const submissionIds = Array.from({ length: 200 }, (_, i) => `submission-${i}`);
 const sessionIds = Array.from({ length: 30 }, (_, i) => `session-${i}`);
-const spectatorIds = Array.from({ length: 100 }, (_, i) => `session-${i}`);
+const spectatorIds = Array.from({ length: 100 }, (_, i) => `spectator-${i}`);
 
 const users = userIds.map((id, index): User => {
   faker.seed(index);

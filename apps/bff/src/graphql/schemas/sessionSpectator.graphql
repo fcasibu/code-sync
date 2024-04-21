@@ -1,0 +1,32 @@
+type Mutation {
+  createSpectator(input: CreateSessionSpectatorInput!): CompleteSessionSpectator
+  updateSpectator(input: UpdateSessionSpectatorInput!): CompleteSessionSpectator
+}
+
+input CreateSessionSpectatorInput {
+  userId: String!
+  sessionId: String!
+}
+
+input UpdateSessionSpectatorInput {
+  spectatorId: String!
+  mode: String!
+}
+
+type CompleteSessionSpectator {
+  id: String!
+  session: CodingProblemSession!
+  user: User!
+  createdAt: DateTime
+  updatedAt: DateTime
+  mode: String!
+}
+
+type SessionSpectator {
+  id: String!
+  sessionId: String!
+  userId: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+  mode: String!
+}
