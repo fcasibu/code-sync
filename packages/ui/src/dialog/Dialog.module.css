@@ -6,24 +6,33 @@
 }
 
 :where(.dialogClose) {
-  @apply absolute
-    right-4
-    top-4;
+  @apply absolute 
+    right-4 
+    top-4 
+    cursor-pointer 
+    rounded-sm 
+    opacity-70 
+    transition-opacity
+    hover:opacity-100 
+    focus:outline-none 
+    focus:ring-2 
+    focus:ring-offset-2 
+    disabled:pointer-events-none;
 }
 
 :where(.dialogContent) {
-  @apply fixed 
-    left-[50%] 
-    top-[50%] 
-    z-50 
-    w-full 
-    max-w-lg 
-    translate-x-[-50%] 
-    translate-y-[-50%] 
-    gap-4 
-    rounded-md
+  @apply rounded-m
+    fixed
+    left-[50%]
+    top-[50%]
+    z-50
+    w-full
+    max-w-lg
+    translate-x-[-50%]
+    translate-y-[-50%]
+    gap-4
     border
-    border-zinc-900 
+    border-zinc-900
     bg-zinc-950
     p-3
     shadow-lg;

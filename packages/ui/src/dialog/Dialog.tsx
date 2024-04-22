@@ -4,7 +4,6 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import { X as CloseIcon } from 'lucide-react';
-import { Button } from '../button';
 import styles from './Dialog.module.css';
 
 export type DialogState = 'open' | 'closed';
@@ -89,6 +88,7 @@ export const DialogContent = forwardRef<
       {...props}
     >
       {children}
+      <DialogClose />
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
@@ -101,13 +101,10 @@ export const DialogClose = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Close
     className={clsx(styles.dialogClose, className)}
-    asChild
     ref={ref}
     {...props}
   >
-    <Button type="button" variant="ghost">
-      <CloseIcon aria-hidden />
-    </Button>
+    <CloseIcon aria-hidden />
   </DialogPrimitive.Close>
 ));
 
