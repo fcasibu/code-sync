@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { javascript } from '@codemirror/lang-javascript';
-import { githubDark } from '@uiw/codemirror-theme-github';
+import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import type { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import CodeMirror from '@uiw/react-codemirror';
 
@@ -26,8 +26,8 @@ export const CodeEditor = ({
       className={className}
       height="400px"
       value={code}
-      theme={githubDark}
-      extensions={[javascript()]}
+      theme={vscodeDark}
+      extensions={[javascript({ jsx: true })]}
       onChange={handleChange}
       {...props}
     />
