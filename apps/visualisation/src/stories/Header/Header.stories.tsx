@@ -17,7 +17,7 @@ export const WithHighlightedTab: Story = {
     nextjs: {
       appDirectory: true,
       navigation: {
-        pathname: '/',
+        pathname: '/explore',
       },
     },
   },

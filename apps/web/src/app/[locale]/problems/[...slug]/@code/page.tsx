@@ -1,23 +1,20 @@
-import { Code as CodeIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { Text } from '@code-sync/ui';
-import { CodeEditor } from '@/components';
-import styles from './page.module.css';
+import { notFound } from 'next/navigation';
+import { getCodingProblemById } from '@/services';
+import { CodeClient } from './page.client';
 
-const Code = () => {
-  const t = useTranslations('CodeEditor');
+interface CodeProps {
+  params: { slug: string[] };
+}
 
+const Code = async ({ params }: CodeProps) => {
+  const problemId = params.slug[0];
+
+  const { codingProblem } = await getCodingProblemById(problemId);
+  if (!codingProblem) return notFound();
+
+  // TODO: create initial code
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
-        <CodeIcon size={15} aria-hidden />
-        <Text as="span">{t('title')}</Text>
-      </div>
-      <CodeEditor
-        className={styles.codeEditor}
-        initialCode='console.log("Hello, World!");'
-      />
-    </div>
+    <CodeClient initialCode={codingProblem.submissions.at(-1)?.code ?? ''} />
   );
 };
 

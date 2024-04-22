@@ -21,8 +21,7 @@
 }
 
 :where(.dialogContent) {
-  @apply rounded-m
-    fixed
+  @apply fixed
     left-[50%]
     top-[50%]
     z-50
@@ -31,6 +30,7 @@
     translate-x-[-50%]
     translate-y-[-50%]
     gap-4
+    rounded-md
     border
     border-zinc-900
     bg-zinc-950

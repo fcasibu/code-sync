@@ -1,26 +1,17 @@
-'use client';
-
-import { useState } from 'react';
 import { javascript } from '@codemirror/lang-javascript';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import type { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import CodeMirror from '@uiw/react-codemirror';
 
 interface CodeEditorProps extends ReactCodeMirrorProps {
-  initialCode: string;
+  code: string;
 }
 
 export const CodeEditor = ({
-  initialCode,
+  code,
   className,
   ...props
 }: Readonly<CodeEditorProps>) => {
-  const [code, setCode] = useState(initialCode);
-
-  const handleChange = (value: string) => {
-    setCode(value);
-  };
-
   return (
     <CodeMirror
       className={className}
@@ -28,7 +19,6 @@ export const CodeEditor = ({
       value={code}
       theme={vscodeDark}
       extensions={[javascript({ jsx: true })]}
-      onChange={handleChange}
       {...props}
     />
   );

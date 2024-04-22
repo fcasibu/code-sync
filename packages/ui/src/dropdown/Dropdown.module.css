@@ -8,5 +8,7 @@
 }
 
 :where(.separator) {
-  @apply my-1 h-[1px] bg-zinc-900;
+  @apply my-1 
+    h-[1px] 
+    bg-zinc-900;
 }

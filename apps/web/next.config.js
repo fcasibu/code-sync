@@ -4,7 +4,11 @@ const securityHeaders = require('./securityHeaders');
 const cacheHeaders = require('./cacheHeaders');
 const path = require('path');
 
-const packages = ['@code-sync/translations', '@code-sync/ui'];
+const packages = [
+  '@code-sync/translations',
+  '@code-sync/ui',
+  '@code-sync/validations',
+];
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {

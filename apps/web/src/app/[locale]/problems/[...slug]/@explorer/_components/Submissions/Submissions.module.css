@@ -30,3 +30,7 @@
   @apply font-bold
     text-red-500;
 }
+
+.dialogTrigger {
+  @apply cursor-pointer;
+}

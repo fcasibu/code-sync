@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { cookies } from 'next/headers';
 import { graphql } from '@/utils';
 import {
@@ -17,7 +18,7 @@ const codingProblemQuery = graphql(
   [completeCodingProblemFragment],
 );
 
-export const getCodingProblemById = async (id: string) => {
+export const getCodingProblemById = cache(async (id: string) => {
   const { data, errors } = await executeGraphQLRequest<
     typeof codingProblemQuery
   >(
@@ -31,4 +32,4 @@ export const getCodingProblemById = async (id: string) => {
   );
 
   return { codingProblem: data?.codingProblem, errors };
-};
+});

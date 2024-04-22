@@ -33,7 +33,7 @@ export const Submissions = ({ submissions }: Readonly<SubmissionsProps>) => {
               <SubmissionContent code={code} />
             </DialogContent>
             <DialogTrigger asChild>
-              <tr>
+              <tr className={styles.dialogTrigger}>
                 <td>
                   {/* TODO: type safety */}
                   <Text
@@ -70,5 +70,5 @@ interface SubmissionContentProps {
 }
 
 const SubmissionContent = ({ code }: Readonly<SubmissionContentProps>) => {
-  return <CodeEditor initialCode={code} readOnly />;
+  return <CodeEditor code={code} readOnly />;
 };
