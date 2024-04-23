@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Header as HeaderComponent } from '@code-sync/web/src/components';
 
-const meta: Meta<typeof HeaderComponent> = {
+export default {
   component: HeaderComponent,
   title: 'components/Header',
-};
-
-export default meta;
+} satisfies Meta;
 
 type Story = StoryObj<typeof HeaderComponent>;
 

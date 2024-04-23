@@ -5,6 +5,7 @@ import * as TabsPrimitive from '@radix-ui/react-tabs';
 import clsx from 'clsx';
 import styles from './Tabs.module.css';
 
+// TODO: styling
 export const Tabs = TabsPrimitive.Root;
 
 export const TabsList = forwardRef<

@@ -8,11 +8,9 @@ import {
 } from '@code-sync/ui';
 import { CodeEditor } from '@code-sync/web/src/components';
 
-const meta: Meta = {
+export default {
   title: 'ui/Dialog',
-};
-
-export default meta;
+} satisfies Meta;
 
 export const Dialog = {
   render: () => (

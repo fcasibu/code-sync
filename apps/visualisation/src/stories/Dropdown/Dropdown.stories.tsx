@@ -12,11 +12,9 @@ import {
   Text,
 } from '@code-sync/ui';
 
-const meta: Meta = {
+export default {
   title: 'ui/Dropdown',
-};
-
-export default meta;
+} satisfies Meta;
 
 export const Dropdown = {
   render: () => (
