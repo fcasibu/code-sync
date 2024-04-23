@@ -99,7 +99,16 @@ const introspection = {
                 "ofType": null
               }
             },
-            "args": []
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CodingProblemsInput",
+                  "ofType": null
+                }
+              }
+            ]
           },
           {
             "name": "codingProblem",
@@ -1523,6 +1532,23 @@ const introspection = {
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "CodingProblemsInput",
+        "inputFields": [
+          {
+            "name": "pagination",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "Pagination",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "CodingProblemByIdInput",
         "inputFields": [
           {
@@ -1852,6 +1878,38 @@ const introspection = {
           }
         ],
         "interfaces": []
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "Pagination",
+        "inputFields": [
+          {
+            "name": "page",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Int"
       },
       {
         "kind": "SCALAR",

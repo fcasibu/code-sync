@@ -4,8 +4,8 @@ import type { Resolvers } from '../types';
 
 const resolver: Resolvers = {
   Query: {
-    codingProblems: (_, __, { codingProblemApi }) => {
-      return codingProblemApi.getCodingProblems();
+    codingProblems: (_, { input }, { codingProblemApi }) => {
+      return codingProblemApi.getCodingProblems(input?.pagination);
     },
     codingProblem: (_, { input }, { codingProblemApi }) => {
       return codingProblemApi.getCodingProblemById(input.id);

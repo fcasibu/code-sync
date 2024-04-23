@@ -4,11 +4,15 @@ import type {
   ProblemUpdateInput,
   z,
 } from '@code-sync/validations';
+import type { Pagination } from '../types';
 
 export class CodingProblemAPI {
   constructor(private readonly prisma: PrismaClient) {}
 
-  public async getCodingProblems() {
+  public async getCodingProblems(pagination?: Pagination) {
+    const { page = 1, limit = 20 } = pagination ?? {};
+    const skip = (page - 1) * limit;
+
     return this.prisma.problem.findMany({
       include: {
         author: true,
@@ -16,6 +20,8 @@ export class CodingProblemAPI {
         submissions: true,
         sessions: true,
       },
+      skip,
+      take: limit,
     });
   }
 

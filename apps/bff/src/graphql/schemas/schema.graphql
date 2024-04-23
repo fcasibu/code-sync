@@ -1,7 +1,7 @@
 type Query {
   user(input: UserByIdInput!): CompleteUser
   userByProviderAndProviderId(provider: String!, providerId: String!): CompleteUser
-  codingProblems: [CompleteCodingProblem]
+  codingProblems(input: CodingProblemsInput): [CompleteCodingProblem]
   codingProblem(input: CodingProblemByIdInput!): CompleteCodingProblem
 }
 
@@ -171,6 +171,10 @@ type CodingProblemSession {
   sharedCode: String!
 }
 
+input CodingProblemsInput {
+  pagination: Pagination!
+}
+
 input CodingProblemByIdInput {
   id: String!
 }
@@ -210,6 +214,11 @@ type CodingProblem {
   authorId: String!
   createdAt: DateTime
   updatedAt: DateTime
+}
+
+input Pagination {
+  page: Int!
+  limit: Int!
 }
 
 schema {

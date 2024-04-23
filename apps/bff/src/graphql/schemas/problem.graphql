@@ -1,11 +1,15 @@
 type Query {
-  codingProblems: [CompleteCodingProblem]
+  codingProblems(input: CodingProblemsInput): [CompleteCodingProblem]
   codingProblem(input: CodingProblemByIdInput!): CompleteCodingProblem
 }
 
 type Mutation {
   createCodingProblem(input: CreateCodingProblemInput!): CompleteCodingProblem
   updateCodingProblem(input: UpdateCodingProblemInput!): CompleteCodingProblem
+}
+
+input CodingProblemsInput {
+  pagination: Pagination!
 }
 
 input CodingProblemByIdInput {

@@ -1,5 +1,6 @@
 import requestGQL from 'supertest-graphql';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { CodingProblemsInput } from '@/graphql/types';
 import type { ResultOf, VariablesOf } from '@/utils';
 import { graphql } from '@/utils';
 import { testHelper } from './testHelper';
@@ -59,6 +60,244 @@ describe('resolver#CodingProblem', () => {
 
       expect(response.data?.codingProblems).toBeDefined();
       expect(response.data?.codingProblems?.length).toBeGreaterThan(0);
+    });
+
+    it('should return a paginated list of coding problems based on input', async () => {
+      const query = graphql(`
+        query CodingProblemQuery($input: CodingProblemsInput) {
+          codingProblems(input: $input) {
+            id
+            title
+            description
+            difficulty
+            author {
+              id
+              email
+              authId
+              displayName
+              authProvider
+              profilePicture
+            }
+            testCases {
+              id
+              input
+              output
+              problemId
+            }
+            submissions {
+              id
+              problemId
+              code
+              userId
+              status
+              language
+            }
+            sessions {
+              id
+              problemId
+              hostId
+              sharedCode
+            }
+          }
+        }
+      `);
+
+      const input: CodingProblemsInput = {
+        pagination: {
+          page: 1,
+          limit: 10,
+        },
+      };
+
+      const response = await requestGQL<ResultOf<typeof query>>(
+        helper.app.expressServer,
+      )
+        .query(query)
+        .variables({ input })
+        .expectNoErrors();
+
+      expect(response.data?.codingProblems).toBeDefined();
+      expect(response.data?.codingProblems?.length).toBe(
+        input.pagination.limit,
+      );
+    });
+
+    it('should return a paginated list of coding problems based on different input', async () => {
+      const query = graphql(`
+        query CodingProblemQuery($input: CodingProblemsInput) {
+          codingProblems(input: $input) {
+            id
+            title
+            description
+            difficulty
+            author {
+              id
+              email
+              authId
+              displayName
+              authProvider
+              profilePicture
+            }
+            testCases {
+              id
+              input
+              output
+              problemId
+            }
+            submissions {
+              id
+              problemId
+              code
+              userId
+              status
+              language
+            }
+            sessions {
+              id
+              problemId
+              hostId
+              sharedCode
+            }
+          }
+        }
+      `);
+
+      const input: CodingProblemsInput = {
+        pagination: {
+          page: 1,
+          limit: 5,
+        },
+      };
+
+      const response = await requestGQL<ResultOf<typeof query>>(
+        helper.app.expressServer,
+      )
+        .query(query)
+        .variables({ input })
+        .expectNoErrors();
+
+      expect(response.data?.codingProblems).toBeDefined();
+      expect(response.data?.codingProblems?.length).toBe(
+        input.pagination.limit,
+      );
+    });
+
+    it('should not return anything if pagination input limit is 0', async () => {
+      const query = graphql(`
+        query CodingProblemQuery($input: CodingProblemsInput) {
+          codingProblems(input: $input) {
+            id
+            title
+            description
+            difficulty
+            author {
+              id
+              email
+              authId
+              displayName
+              authProvider
+              profilePicture
+            }
+            testCases {
+              id
+              input
+              output
+              problemId
+            }
+            submissions {
+              id
+              problemId
+              code
+              userId
+              status
+              language
+            }
+            sessions {
+              id
+              problemId
+              hostId
+              sharedCode
+            }
+          }
+        }
+      `);
+
+      const input: CodingProblemsInput = {
+        pagination: {
+          page: 1,
+          limit: 0,
+        },
+      };
+
+      const response = await requestGQL<ResultOf<typeof query>>(
+        helper.app.expressServer,
+      )
+        .query(query)
+        .variables({ input })
+        .expectNoErrors();
+
+      expect(response.data?.codingProblems).toBeDefined();
+      expect(response.data?.codingProblems?.length).toBe(
+        input.pagination.limit,
+      );
+    });
+
+    it('should return an empty array if selected page does not have enough data', async () => {
+      const query = graphql(`
+        query CodingProblemQuery($input: CodingProblemsInput) {
+          codingProblems(input: $input) {
+            id
+            title
+            description
+            difficulty
+            author {
+              id
+              email
+              authId
+              displayName
+              authProvider
+              profilePicture
+            }
+            testCases {
+              id
+              input
+              output
+              problemId
+            }
+            submissions {
+              id
+              problemId
+              code
+              userId
+              status
+              language
+            }
+            sessions {
+              id
+              problemId
+              hostId
+              sharedCode
+            }
+          }
+        }
+      `);
+
+      const input: CodingProblemsInput = {
+        pagination: {
+          page: 12345678,
+          limit: 1,
+        },
+      };
+
+      const response = await requestGQL<ResultOf<typeof query>>(
+        helper.app.expressServer,
+      )
+        .query(query)
+        .variables({ input })
+        .expectNoErrors();
+
+      expect(response.data?.codingProblems).toBeDefined();
+      expect(response.data?.codingProblems?.length).toBe(0);
     });
   });
 

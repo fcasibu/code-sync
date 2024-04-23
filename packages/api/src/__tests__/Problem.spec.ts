@@ -49,6 +49,8 @@ describe('CodinaProblem#API', () => {
       const problems = await problemApi.getCodingProblems();
 
       expect(mockPrisma.problem.findMany).toHaveBeenCalledWith({
+        skip: 0,
+        take: 20,
         include: {
           author: true,
           testCases: true,
