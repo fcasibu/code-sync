@@ -182,66 +182,6 @@ describe('resolver#CodingProblem', () => {
       );
     });
 
-    it('should not return anything if pagination input limit is 0', async () => {
-      const query = graphql(`
-        query CodingProblemQuery($input: CodingProblemsInput) {
-          codingProblems(input: $input) {
-            id
-            title
-            description
-            difficulty
-            author {
-              id
-              email
-              authId
-              displayName
-              authProvider
-              profilePicture
-            }
-            testCases {
-              id
-              input
-              output
-              problemId
-            }
-            submissions {
-              id
-              problemId
-              code
-              userId
-              status
-              language
-            }
-            sessions {
-              id
-              problemId
-              hostId
-              sharedCode
-            }
-          }
-        }
-      `);
-
-      const input: CodingProblemsInput = {
-        pagination: {
-          page: 1,
-          limit: 0,
-        },
-      };
-
-      const response = await requestGQL<ResultOf<typeof query>>(
-        helper.app.expressServer,
-      )
-        .query(query)
-        .variables({ input })
-        .expectNoErrors();
-
-      expect(response.data?.codingProblems).toBeDefined();
-      expect(response.data?.codingProblems?.length).toBe(
-        input.pagination.limit,
-      );
-    });
-
     it('should return an empty array if selected page does not have enough data', async () => {
       const query = graphql(`
         query CodingProblemQuery($input: CodingProblemsInput) {
@@ -298,6 +238,120 @@ describe('resolver#CodingProblem', () => {
 
       expect(response.data?.codingProblems).toBeDefined();
       expect(response.data?.codingProblems?.length).toBe(0);
+    });
+
+    it('should return errors if input page is invalid', async () => {
+      const query = graphql(`
+        query CodingProblemQuery($input: CodingProblemsInput) {
+          codingProblems(input: $input) {
+            id
+            title
+            description
+            difficulty
+            author {
+              id
+              email
+              authId
+              displayName
+              authProvider
+              profilePicture
+            }
+            testCases {
+              id
+              input
+              output
+              problemId
+            }
+            submissions {
+              id
+              problemId
+              code
+              userId
+              status
+              language
+            }
+            sessions {
+              id
+              problemId
+              hostId
+              sharedCode
+            }
+          }
+        }
+      `);
+
+      const input: CodingProblemsInput = {
+        pagination: {
+          page: -1,
+          limit: 1,
+        },
+      };
+
+      const response = await requestGQL<ResultOf<typeof query>>(
+        helper.app.expressServer,
+      )
+        .query(query)
+        .variables({ input });
+
+      expect(response.data?.codingProblems).toBeNull();
+      expect(response.errors).toBeDefined();
+    });
+
+    it('should return errors if input limit is invalid', async () => {
+      const query = graphql(`
+        query CodingProblemQuery($input: CodingProblemsInput) {
+          codingProblems(input: $input) {
+            id
+            title
+            description
+            difficulty
+            author {
+              id
+              email
+              authId
+              displayName
+              authProvider
+              profilePicture
+            }
+            testCases {
+              id
+              input
+              output
+              problemId
+            }
+            submissions {
+              id
+              problemId
+              code
+              userId
+              status
+              language
+            }
+            sessions {
+              id
+              problemId
+              hostId
+              sharedCode
+            }
+          }
+        }
+      `);
+
+      const input: CodingProblemsInput = {
+        pagination: {
+          page: 1,
+          limit: 0,
+        },
+      };
+
+      const response = await requestGQL<ResultOf<typeof query>>(
+        helper.app.expressServer,
+      )
+        .query(query)
+        .variables({ input });
+
+      expect(response.data?.codingProblems).toBeNull();
+      expect(response.errors).toBeDefined();
     });
   });
 

@@ -4,10 +4,11 @@ import {
   executeGraphQLRequest,
   getRequestBody,
 } from '../executeGraphQLRequest';
+import type { Pagination } from '../types';
 
 const codingProblemsQuery = graphql(`
-  query CodingProblemsQuery {
-    codingProblems {
+  query CodingProblemsQuery($input: CodingProblemsInput) {
+    codingProblems(input: $input) {
       id
       title
       description
@@ -17,8 +18,9 @@ const codingProblemsQuery = graphql(`
   }
 `);
 
-// TODO: filtering
-export const getCodingProblems = async () => {
+export const getCodingProblems = async (
+  pagination: Pagination = { page: 1, limit: 5 },
+) => {
   const { data, errors } = await executeGraphQLRequest<
     typeof codingProblemsQuery
   >(
@@ -26,7 +28,11 @@ export const getCodingProblems = async () => {
       headers: {
         cookie: cookies().toString(),
       },
-      body: getRequestBody(codingProblemsQuery, {}),
+      body: getRequestBody(codingProblemsQuery, {
+        input: {
+          pagination,
+        },
+      }),
     },
     'Something went wrong with the getCodingProblems query',
   );

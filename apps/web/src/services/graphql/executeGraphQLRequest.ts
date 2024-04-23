@@ -1,5 +1,6 @@
-import type { ResultOf, TadaDocumentNode } from 'gql.tada';
-import type { ASTNode, GraphQLError } from 'graphql';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ResultOf, TadaDocumentNode, VariablesOf } from 'gql.tada';
+import type { GraphQLError } from 'graphql';
 import { print } from 'graphql';
 import { logger } from '@code-sync/logger';
 import {
@@ -10,14 +11,12 @@ import { REVALIDATE_TIME } from '@/constants/cache';
 import { env } from '@/env';
 import { isServer } from '@/utils';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Result<T extends TadaDocumentNode<any, any>> {
   data: ResultOf<T> | null;
   errors: GraphQLError[] | null;
 }
 
 export const executeGraphQLRequest = async <
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends TadaDocumentNode<any, any>,
 >(
   init: RequestInit,
@@ -53,7 +52,10 @@ export const executeGraphQLRequest = async <
   }
 };
 
-export const getRequestBody = (query: ASTNode, variables: unknown) =>
+export const getRequestBody = <T extends TadaDocumentNode<any, any>>(
+  query: T,
+  variables: VariablesOf<T>,
+) =>
   JSON.stringify({
     query: print(query),
     variables,
