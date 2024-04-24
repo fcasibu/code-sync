@@ -33,6 +33,9 @@ export const getCodingProblems = async (
           pagination,
         },
       }),
+      next: {
+        tags: ['coding_problems'],
+      },
     },
     'Something went wrong with the getCodingProblems query',
   );

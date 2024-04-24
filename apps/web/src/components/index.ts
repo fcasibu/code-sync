@@ -1,3 +1,3 @@
-export * from './code-editor';
+export * from './codeEditor';
 export * from './header';
 export * from './navigation';

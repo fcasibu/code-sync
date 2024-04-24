@@ -1,6 +1,10 @@
 {
   "extends": "@code-sync/typescript-config/next.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "plugins": [
       {
         "name": "next"

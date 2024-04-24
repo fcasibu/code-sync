@@ -27,6 +27,9 @@ export const getCodingProblemById = cache(async (id: string) => {
         cookie: cookies().toString(),
       },
       body: getRequestBody(codingProblemQuery, { input: { id } }),
+      next: {
+        tags: ['coding_problems'],
+      },
     },
     'Something went wrong with the getCodingProblemById query',
   );

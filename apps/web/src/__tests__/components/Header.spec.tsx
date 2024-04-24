@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import * as translations from '@code-sync/translations';
 import { Header, Navigation } from '@/components';
 import { TestProviders, testHelper } from '../testHelpers';
 
@@ -39,6 +40,22 @@ describe('components#Header', () => {
         /problems/i,
       );
       expect(screen.getByText(/toggle user menu/i)).toBeDefined();
+    });
+
+    it('should highlight a link based on the current path', () => {
+      vi.spyOn(translations, 'useLocalizedPathname').mockReturnValue(
+        '/explore',
+      );
+
+      render(
+        <TestProviders>
+          <Navigation />
+        </TestProviders>,
+      );
+
+      expect(screen.getByRole('link', { name: /explore/i }).className).toMatch(
+        /linkHighlight/i,
+      );
     });
 
     it('should open a dropdown menu when clicking the avatar', async () => {
