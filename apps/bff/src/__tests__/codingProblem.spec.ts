@@ -1,6 +1,6 @@
 import requestGQL from 'supertest-graphql';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { CodingProblemsInput } from '@/graphql/types';
+import type { CodingProblemsInput } from '@/graphql/types';
 import type { ResultOf, VariablesOf } from '@/utils';
 import { graphql } from '@/utils';
 import { testHelper } from './testHelper';
