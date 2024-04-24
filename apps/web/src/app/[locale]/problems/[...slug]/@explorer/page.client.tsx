@@ -1,6 +1,8 @@
+'use client';
+
 import { notFound } from 'next/navigation';
-import { LocalizedLink, useTranslations } from '@code-sync/translations';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@code-sync/ui';
+import { useLocalizedRouter, useTranslations } from '@code-sync/translations';
+import { Tabs, TabsContent, TabsList, TabsTrigger, Text } from '@code-sync/ui';
 import type { CompleteCodingProblem } from '@/services';
 import { isDefined } from '@/utils';
 import { Description, Submissions } from './_components';
@@ -16,6 +18,7 @@ export const ExplorerClient = ({
   problemId,
   codingProblem,
 }: ExplorerClientProps) => {
+  const router = useLocalizedRouter();
   const t = useTranslations('ProblemDetail.Explorer');
 
   const { description, submissions } = codingProblem;
@@ -36,13 +39,21 @@ export const ExplorerClient = ({
     return notFound();
   }
 
+  const handleTabClick = (href: string) => () => {
+    router.push(href);
+  };
+
   return (
     <div>
       <Tabs value={tabValue}>
         <TabsList>
           {tabTriggers.map(({ value, href, title }) => (
-            <TabsTrigger value={value} key={value}>
-              <LocalizedLink href={href}>{title}</LocalizedLink>
+            <TabsTrigger
+              onClick={handleTabClick(href)}
+              value={value}
+              key={value}
+            >
+              <Text>{title}</Text>
             </TabsTrigger>
           ))}
         </TabsList>
