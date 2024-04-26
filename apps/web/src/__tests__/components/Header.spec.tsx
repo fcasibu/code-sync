@@ -17,7 +17,11 @@ describe('components#Header', () => {
       </TestProviders>,
     );
 
-    expect(screen.getByText(/code sync/i)).toBeDefined();
+    const headerLogo = screen.getByRole<HTMLAnchorElement>('link', {
+      name: /code sync/i,
+    });
+    expect(headerLogo).toBeDefined();
+    expect(headerLogo.pathname).toBe('/en');
     expect(screen.getByText(/toggle user menu/i)).toBeDefined();
     expect(screen.getByRole('navigation')).toBeDefined();
   });
@@ -67,14 +71,14 @@ describe('components#Header', () => {
 
       const avatar = screen.getByText(/toggle user menu/i);
       expect(screen.queryByText(/my account/i)).toBeNull();
-      expect(screen.queryByText(/settings/i)).toBeNull();
-      expect(screen.queryByText(/logout/i)).toBeNull();
+      expect(screen.queryByRole('link', { name: /settings/i })).toBeNull();
+      expect(screen.queryByRole('link', { name: /logout/i })).toBeNull();
 
       await userEvent.click(avatar);
 
-      expect(screen.queryByText(/my account/i)).toBeDefined();
-      expect(screen.queryByText(/settings/i)).toBeDefined();
-      expect(screen.queryByText(/logout/i)).toBeDefined();
+      expect(screen.queryByText(/my account/i)).not.toBeNull();
+      expect(screen.queryByRole('link', { name: /settings/i })).not.toBeNull();
+      expect(screen.queryByRole('link', { name: /logout/i })).not.toBeNull();
     });
   });
 });

@@ -11,7 +11,7 @@
     "lint": "pnpm stylelint && pnpm eslint",
     "lint:fix": "pnpm stylelint --fix && pnpm eslint --fix",
     "start": "cross-env NO_PRETTY_LOGGING=true next start",
-    "stylelint": "stylelint --cache --cache-location ./.stylelintcache --cache-strategy content **/*.css",
+    "stylelint": "stylelint --cache --cache-location ./.stylelintcache --cache-strategy content src/**/*.css",
     "test": "vitest run"
   },
   "dependencies": {
