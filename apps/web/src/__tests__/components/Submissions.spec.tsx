@@ -138,7 +138,7 @@ describe('components#Submissions', () => {
 
     await userEvent.click(screen.getByText(/accepted/i));
 
-    expect(screen.findByRole('dialog')).toBeDefined();
-    expect(screen.findByText(mockSubmissions[0].code)).toBeDefined();
+    expect(screen.getByRole('dialog')).toBeDefined();
+    expect(screen.getByText(mockSubmissions[0].code)).toBeDefined();
   });
 });
